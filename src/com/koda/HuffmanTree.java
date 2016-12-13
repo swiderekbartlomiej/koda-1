@@ -11,7 +11,7 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 	
 	public HuffmanTree(ArrayList<NodeType> alphabet) 
 	{
-		int tree_size = (int)Math.floor((Math.log(alphabet.size())/Math.log(2.0))); //Max elements in binary tree
+		//int tree_size = (int)Math.floor((Math.log(alphabet.size())/Math.log(2.0))); //Max elements in binary tree
 		m_Tree = null;
 		
 		Comparator<TreeNodeDecorator> queue_comparator = new Comparator<TreeNodeDecorator>()
@@ -42,30 +42,32 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 			if(first_is_tree && second_is_tree)
 			{
 				//if both of them are trees, merge them into one
-				TreeNodeDecorator combined = new TreeNodeDecorator();
+				TreeNodeDecorator combined_trees = new TreeNodeDecorator();
 				
-				combined.setAtIndex(TreeNodeDecorator.ROOT_INDEX, new HuffmanTreeNode(first.getWeight() + second.getWeight()));
-				moveTreeNode(combined, TreeNodeDecorator.ROOT_INDEX, first, TreeNodeDecorator.ROOT_INDEX);
-				moveTreeNode(combined, TreeNodeDecorator.ROOT_RIGHT_CHILD, second, TreeNodeDecorator.ROOT_INDEX);
+				combined_trees.setAtIndex(TreeNodeDecorator.ROOT_INDEX, new HuffmanTreeNode(first.getWeight() + second.getWeight()));
+				moveTreeNode(combined_trees, TreeNodeDecorator.ROOT_LEFT_CHILD, first, TreeNodeDecorator.ROOT_INDEX);
+				moveTreeNode(combined_trees, TreeNodeDecorator.ROOT_RIGHT_CHILD, second, TreeNodeDecorator.ROOT_INDEX);
+				
+				queue.add(combined_trees);
 			}
 			else if(!first_is_tree && !second_is_tree)
 			{
 				//if both of them are simple elements, create a new tree
 				TreeNodeDecorator decorated_tree_node = new TreeNodeDecorator();
 				
-				decorated_tree_node.setAtIndex(1, new HuffmanTreeNode(first.getWeight() + second.getWeight()));
-				decorated_tree_node.setAtIndex(2, first.getTreeNode());
-				decorated_tree_node.setAtIndex(3, second.getTreeNode());
+				decorated_tree_node.setAtIndex(TreeNodeDecorator.ROOT_INDEX, new HuffmanTreeNode(first.getWeight() + second.getWeight()));
+				decorated_tree_node.setAtIndex(TreeNodeDecorator.ROOT_LEFT_CHILD, first.getTreeNode());
+				decorated_tree_node.setAtIndex(TreeNodeDecorator.ROOT_RIGHT_CHILD, second.getTreeNode());
 				decorated_tree_node.recalculateWeights();
 				
 				queue.add(decorated_tree_node);
 			}
 			else 
 			{
+				TreeNodeDecorator extended_tree = new TreeNodeDecorator();
 				//if one of them is element and the other a tree, merge them into new tree
 				if(first_is_tree)
 				{
-					TreeNodeDecorator extended_tree = new TreeNodeDecorator();
 					extended_tree.setAtIndex(TreeNodeDecorator.ROOT_INDEX, new HuffmanTreeNode(first.getWeight() + second.getWeight()));
 					extended_tree.setAtIndex(TreeNodeDecorator.ROOT_RIGHT_CHILD, second.getTreeNode());
 					moveTreeNode(extended_tree, TreeNodeDecorator.ROOT_LEFT_CHILD, first, TreeNodeDecorator.ROOT_INDEX);
@@ -74,13 +76,12 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 				}
 				else
 				{
-					TreeNodeDecorator extended_tree = new TreeNodeDecorator();
 					extended_tree.setAtIndex(TreeNodeDecorator.ROOT_INDEX, new HuffmanTreeNode(first.getWeight() + second.getWeight()));
 					extended_tree.setAtIndex(TreeNodeDecorator.ROOT_LEFT_CHILD, first.getTreeNode());
 					moveTreeNode(extended_tree, TreeNodeDecorator.ROOT_RIGHT_CHILD, second, TreeNodeDecorator.ROOT_INDEX);
-					
-					queue.add(extended_tree);
 				}
+				
+				queue.add(extended_tree);
 			}
 		}
 		
@@ -96,14 +97,9 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 	 */
 	private void moveTreeNode(TreeNodeDecorator mainTree, int mainTreeIndex, TreeNodeDecorator subTreeNode, int subTreeIndex)
 	{
-		if(mainTreeIndex == 0)
+		if(mainTreeIndex == 0 || subTreeIndex == 0)
 		{
-			throw new IllegalArgumentException("Function moveTreeNode won't work if main tree index is zero!");
-		}
-		
-		if(subTreeIndex == 0)
-		{
-			throw new IllegalArgumentException("Function moveTreeNode won't work if sub tree index is zero!");
+			throw new IllegalArgumentException("Function moveTreeNode won't work if any tree index is zero!");
 		}
 		
 		mainTree.setAtIndex(mainTreeIndex, subTreeNode.atIndex(subTreeIndex));
@@ -112,7 +108,7 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 		{
 			moveTreeNode(mainTree, HuffmanTreeNode.leftChild(mainTreeIndex), subTreeNode, HuffmanTreeNode.leftChild(subTreeIndex));
 		}
-		else if(subTreeNode.atIndex(HuffmanTreeNode.rightChild(subTreeIndex)) != null)
+		if(subTreeNode.atIndex(HuffmanTreeNode.rightChild(subTreeIndex)) != null)
 		{
 			moveTreeNode(mainTree, HuffmanTreeNode.rightChild(mainTreeIndex), subTreeNode, HuffmanTreeNode.rightChild(subTreeIndex));
 		}

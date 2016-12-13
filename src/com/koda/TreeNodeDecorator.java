@@ -15,13 +15,23 @@ public class TreeNodeDecorator
 	public TreeNodeDecorator()
 	{
 		m_TreeNode = null;
-		m_Tree = new ArrayList<>();
+		initializeTreeArray();
 	}
 	
 	public TreeNodeDecorator(HuffmanTreeNode node)
 	{	
 		m_TreeNode = node;
+		m_Tree = null;
+		//initializeTreeArray();
+	}
+	
+	private void initializeTreeArray()
+	{
 		m_Tree = new ArrayList<>();
+		for (int i = 0; i < 10; ++i)
+		{
+			m_Tree.add(null);
+		}
 	}
 	
 	public HuffmanTreeNode atIndex(int index)
@@ -50,10 +60,12 @@ public class TreeNodeDecorator
 	{
 		if(m_Tree.size() - 1 < index)
 		{
-			m_Tree.ensureCapacity(index + 1);
-			//throw new IndexOutOfBoundsException("Tree array index out of boundary!");
-			m_Tree.set(index, node);
+			for(int i = m_Tree.size() - 1; i < index; ++i)
+			{
+				m_Tree.add(null);
+			}
 		}
+		m_Tree.set(index, node);
 	}
 	
 	public void recalculateWeights()
@@ -64,16 +76,23 @@ public class TreeNodeDecorator
 	private long calculateNodeWeight(int startIndex)
 	{
 		long calculated_weight = 0L;
+		boolean has_at_least_one_child = false;
 		
-		if(m_TreeNode != null)
+		if(m_Tree == null)
 		{
-			return m_TreeNode.getWeight();
+			return 0L;
 		}
 		
-		if(m_Tree.size() - 1  >= HuffmanTreeNode.leftChild(startIndex))
+		//if(m_Tree.get(startIndex) != null)
+		//{
+		//	return m_TreeNode.getWeight();
+		//}
+		
+		if(m_Tree.size() - 1 >= HuffmanTreeNode.leftChild(startIndex))
 		{
 			if(m_Tree.get(HuffmanTreeNode.leftChild(startIndex)) != null)
 			{
+				has_at_least_one_child = true;
 				calculated_weight += calculateNodeWeight(HuffmanTreeNode.leftChild(startIndex));
 			}
 		}
@@ -82,8 +101,14 @@ public class TreeNodeDecorator
 		{
 			if(m_Tree.get(HuffmanTreeNode.rightChild(startIndex)) != null)
 			{
+				has_at_least_one_child = true;
 				calculated_weight += calculateNodeWeight(HuffmanTreeNode.rightChild(startIndex));
 			}
+		}
+		
+		if(has_at_least_one_child == false)
+		{
+			return m_Tree.get(startIndex).getWeight();
 		}
 		
 		m_Tree.get(startIndex).setWeight(calculated_weight);
@@ -92,7 +117,7 @@ public class TreeNodeDecorator
 	
 	public boolean hasTreeAssociated()
 	{
-		if(m_Tree.size() == 0)
+		if(m_TreeNode != null)
 		{
 			return false;
 		}
@@ -105,14 +130,16 @@ public class TreeNodeDecorator
 	public long getWeight()
 	{
 		long val = 0L;
-		if(m_Tree.size() != 0)
-		{
-			val = m_Tree.get(ROOT_INDEX).getWeight();
-		}
-		else
+		
+		if(m_TreeNode != null)
 		{
 			val = m_TreeNode.getWeight();
 		}
+		else
+		{
+			val = m_Tree.get(ROOT_INDEX).getWeight();
+		}
+
 		return val;
 	}
 	
