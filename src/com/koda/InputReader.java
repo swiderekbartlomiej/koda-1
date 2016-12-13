@@ -10,18 +10,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class InputReader {
 	
 	// lista elementów odczytanych z pliku wejściowego
-	private List<String> inputList = new ArrayList();
+	private ArrayList<String> inputList;
 	
 	// mapa znak-liczba wystapien
 	private HashMap<String, Integer> statisticMap = new HashMap<String, Integer>();
 	
-	public InputReader (){}
+	public InputReader ()
+	{
+		inputList = new ArrayList<>();
+	}
 	
 	// czyta plik wejsciowy, generujac przy tym statystykę
 	public void readFromFile (String path){
@@ -39,6 +41,7 @@ public class InputReader {
 					statisticMap.put(nextChar, statisticMap.get(nextChar)+1);
 				}
 			}
+			scanner.close();
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
