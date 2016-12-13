@@ -52,4 +52,14 @@ public class HuffmanTreeNode
 		int prime = 37;
 		return (int) (prime + m_Weight);
 	}
+	
+	public static int leftChild(int parentIndex)
+	{
+		return parentIndex * 2;
+	}
+	
+	public static int rightChild(int parentIndex)
+	{
+		return parentIndex * 2 + 1; 
+	}
 }

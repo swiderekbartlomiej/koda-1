@@ -48,31 +48,29 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 			else if(!first_is_tree && !second_is_tree)
 			{
 				//if both of them are simple elements, create a new tree
+				TreeNodeDecorator decorated_tree_node = new TreeNodeDecorator();
+				
+				decorated_tree_node.setAtIndex(1, new HuffmanTreeNode(first.getWeight() + second.getWeight()));
+				decorated_tree_node.setAtIndex(2, first.getTreeNode());
+				decorated_tree_node.setAtIndex(3, second.getTreeNode());
+				decorated_tree_node.recalculateWeights();
+				
+				queue.add(decorated_tree_node);
 			}
 			else 
 			{
 				//if one of them is element and the other a tree, merge them into new tree
+				if(first_is_tree)
+				{
+					TreeNodeDecorator extended_tree = new TreeNodeDecorator();
+					extended_tree.setAtIndex(TreeNodeDecorator.ROOT_INDEX, new HuffmanTreeNode(first.getWeight() + second.getWeight()));
+					extended_tree.setAtIndex(TreeNodeDecorator.ROOT_LEFT_CHILD, second.getTreeNode());
+					moveTreeNode(extended_tree, TreeNodeDecorator.ROOT_RIGHT_CHILD, first, TreeNodeDecorator.ROOT_INDEX);
+				}
 			}
-			
-			
-			
-			
-			
-			
-			
 		}
 	}
 	
-	
-	private int leftChildIndex(int parentIndex)
-	{
-		return parentIndex * 2;
-	}
-	
-	private int rightChildIndex(int parentIndex)
-	{
-		return parentIndex * 2 + 1;
-	}
 	
 	private void extendTree(NodeType f, NodeType s)
 	{
@@ -85,7 +83,7 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 	 * @param subTreeIndex
 	 * BEHOLD THE POWER OF GLORIOUS RECURSION!
 	 */
-	private void moveTreeNode(int mainTreeIndex, TreeNodeDecorator subTreeNode, int subTreeIndex)
+	private void moveTreeNode(TreeNodeDecorator mainTree, int mainTreeIndex, TreeNodeDecorator subTreeNode, int subTreeIndex)
 	{
 		if(mainTreeIndex == 0)
 		{
@@ -97,15 +95,15 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 			throw new IllegalArgumentException("Function moveTreeNode won't work if sub tree index is zero!");
 		}
 		
-		m_Tree.set(mainTreeIndex, subTreeNode.atIndex(subTreeIndex));
+		mainTree.setAtIndex(mainTreeIndex, subTreeNode.atIndex(subTreeIndex));
 		
-		if(subTreeNode.atIndex(leftChildIndex(subTreeIndex)) != null)
+		if(subTreeNode.atIndex(HuffmanTreeNode.leftChild(subTreeIndex)) != null)
 		{
-			moveTreeNode(leftChildIndex(mainTreeIndex), subTreeNode, leftChildIndex(subTreeIndex));
+			moveTreeNode(mainTree ,HuffmanTreeNode.leftChild(mainTreeIndex), subTreeNode, HuffmanTreeNode.leftChild(subTreeIndex));
 		}
-		else if(subTreeNode.atIndex(rightChildIndex(subTreeIndex)) != null)
+		else if(subTreeNode.atIndex(HuffmanTreeNode.rightChild(subTreeIndex)) != null)
 		{
-			moveTreeNode(rightChildIndex(mainTreeIndex), subTreeNode, rightChildIndex(subTreeIndex));
+			moveTreeNode(mainTree ,HuffmanTreeNode.rightChild(mainTreeIndex), subTreeNode, HuffmanTreeNode.rightChild(subTreeIndex));
 		}
 	}
 	

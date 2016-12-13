@@ -8,6 +8,16 @@ public class TreeNodeDecorator
 	
 	private ArrayList<HuffmanTreeNode> m_Tree;
 	
+	public static final int ROOT_INDEX = 1;
+	public static final int ROOT_LEFT_CHILD = 2;
+	public static final int ROOT_RIGHT_CHILD = 3;
+	
+	public TreeNodeDecorator()
+	{
+		m_TreeNode = null;
+		m_Tree = new ArrayList<>();
+	}
+	
 	public TreeNodeDecorator(HuffmanTreeNode node)
 	{	
 		m_TreeNode = node;
@@ -18,7 +28,7 @@ public class TreeNodeDecorator
 	{
 		if(m_Tree != null)
 		{
-			if(m_Tree.size() < index)
+			if(m_Tree.size() - 1 < index)
 			{
 				return null;
 			}
@@ -31,14 +41,53 @@ public class TreeNodeDecorator
 		}
 	}
 	
+	public HuffmanTreeNode getTreeNode()
+	{
+		return m_TreeNode;
+	}
+	
 	public void setAtIndex(int index, HuffmanTreeNode node)
 	{
-		if(m_Tree.size() < index)
+		if(m_Tree.size() - 1 < index)
 		{
-			throw new IndexOutOfBoundsException("Tree array index out of boundary!");
+			m_Tree.ensureCapacity(index + 1);
+			//throw new IndexOutOfBoundsException("Tree array index out of boundary!");
+			m_Tree.set(index, node);
+		}
+	}
+	
+	public void recalculateWeights()
+	{
+		calculateNodeWeight(ROOT_INDEX);
+	}
+	
+	private long calculateNodeWeight(int startIndex)
+	{
+		long calculated_weight = 0L;
+		
+		if(m_TreeNode != null)
+		{
+			return m_TreeNode.getWeight();
 		}
 		
-		m_Tree.set(index, node);
+		if(m_Tree.size() - 1  >= HuffmanTreeNode.leftChild(startIndex))
+		{
+			if(m_Tree.get(HuffmanTreeNode.leftChild(startIndex)) != null)
+			{
+				calculated_weight += calculateNodeWeight(HuffmanTreeNode.leftChild(startIndex));
+			}
+		}
+		
+		if(m_Tree.size() - 1  >= HuffmanTreeNode.rightChild(startIndex))
+		{
+			if(m_Tree.get(HuffmanTreeNode.rightChild(startIndex)) != null)
+			{
+				calculated_weight += calculateNodeWeight(HuffmanTreeNode.rightChild(startIndex));
+			}
+		}
+		
+		m_Tree.get(startIndex).setWeight(calculated_weight);
+		return calculated_weight;
 	}
 	
 	public boolean hasTreeAssociated()
@@ -58,10 +107,7 @@ public class TreeNodeDecorator
 		long val = 0L;
 		if(m_Tree.size() != 0)
 		{
-			for (HuffmanTreeNode node : m_Tree)
-			{
-				val += node.getWeight();
-			}
+			val = m_Tree.get(ROOT_INDEX).getWeight();
 		}
 		else
 		{
