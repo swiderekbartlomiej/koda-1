@@ -58,4 +58,9 @@ public class ContextCharacter extends TwoCharacters
 		int prime = 57;
 		return prime + (m_Characters[0] != null ? m_Characters[0].hashCode() : 0) + (m_Characters[1] != null ? m_Characters[1].hashCode() : 0);
 	}
+	
+	@Override
+	public void print(){
+		System.out.println(m_Characters[0]+"|"+m_Characters[1]+" "+super.getWeight());
+	}
 }
