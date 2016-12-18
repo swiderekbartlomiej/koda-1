@@ -19,7 +19,7 @@ public class InputReader {
 	String path;
 	
 	// lista elementów odczytanych z pliku wejściowego
-	private List<String> inputList = new ArrayList();
+	private List<String> inputList = new ArrayList<>();
 	
 	// mapa znak-liczba wystapien
 	private HashMap<String, Integer> statisticMap = new HashMap<String, Integer>();

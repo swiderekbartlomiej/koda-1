@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class CodeWriter {
 	
 	//Do tej listy buduje BinaryBox'y wypełnione kodem
-	private List<Integer> outputlistOfIntMagazines = new ArrayList();
+	private List<Integer> outputlistOfIntMagazines = new ArrayList<>();
 	
 
 	/**

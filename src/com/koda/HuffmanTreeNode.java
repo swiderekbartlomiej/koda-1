@@ -62,9 +62,19 @@ public class HuffmanTreeNode
 	{
 		return parentIndex * 2 + 1; 
 	}
-
-	public void print() {
-		// TODO Auto-generated method stub
-		
+	
+	public static int codeLeftNodeMove(int currentCode)
+	{
+		return currentCode = (currentCode << 1);
+	}
+	
+	public static int codeRightNodeMove(int currentCode)
+	{
+		currentCode = (currentCode << 1);
+		return ++currentCode;
+	}
+	
+	public void print() 
+	{
 	}
 }

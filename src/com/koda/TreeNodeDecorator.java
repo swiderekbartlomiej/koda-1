@@ -1,8 +1,9 @@
 package com.koda;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class TreeNodeDecorator 
+public class TreeNodeDecorator<NodeType> 
 {
 	private HuffmanTreeNode m_TreeNode;
 	
@@ -143,5 +144,48 @@ public class TreeNodeDecorator
 		return val;
 	}
 	
+	private void getNodeCode(int currentCode, int index, HashMap<NodeType, Integer> codes)
+	{
+		if(index > m_Tree.size() - 1)
+		{
+			return;
+		}
+		
+		boolean has_children = false;
+		
+		if(m_Tree.size() - 1 >= HuffmanTreeNode.leftChild(index))
+		{
+			if(m_Tree.get(HuffmanTreeNode.leftChild(index)) != null)
+			{
+				has_children = true;
+				getNodeCode(HuffmanTreeNode.codeLeftNodeMove(currentCode), HuffmanTreeNode.leftChild(index), codes);
+			}
+		}
+		
+		if(m_Tree.size() - 1  >= HuffmanTreeNode.rightChild(index))
+		{
+			if(m_Tree.get(HuffmanTreeNode.rightChild(index)) != null)
+			{
+				has_children = true;
+				getNodeCode(HuffmanTreeNode.codeRightNodeMove(currentCode), HuffmanTreeNode.rightChild(index), codes);
+			}
+		}
+		
+		if(has_children == false)
+		{
+			codes.put((NodeType)m_Tree.get(index), currentCode);
+			return;
+		}
+		else
+		{
+			return;
+		}
+	}
 	
+	public HashMap<NodeType, Integer> getCodes()
+	{
+		HashMap<NodeType, Integer> codes = new HashMap<>();
+		getNodeCode(0, ROOT_INDEX, codes);
+		return codes;
+	}
 }

@@ -2,31 +2,33 @@ package com.koda;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 
 
 public class HuffmanTree<NodeType extends HuffmanTreeNode> 
 {
-	private TreeNodeDecorator m_Tree;
+	private TreeNodeDecorator<NodeType> m_Tree;
 	
 	public HuffmanTree(ArrayList<NodeType> alphabet) 
 	{
 		//int tree_size = (int)Math.floor((Math.log(alphabet.size())/Math.log(2.0))); //Max elements in binary tree
 		m_Tree = null;
 		
-		Comparator<TreeNodeDecorator> queue_comparator = new Comparator<TreeNodeDecorator>()
+		Comparator<TreeNodeDecorator<NodeType>> queue_comparator = new Comparator<TreeNodeDecorator<NodeType>>()
 		{
 			@Override
-			public int compare(TreeNodeDecorator n1, TreeNodeDecorator n2)
+			public int compare(TreeNodeDecorator<NodeType> n1, TreeNodeDecorator<NodeType> n2)
 			{
 				return (int)(n1.getWeight() - n2.getWeight());
 			}
 		};
 		
-		PriorityQueue<TreeNodeDecorator> queue =  new PriorityQueue<>(alphabet.size(), queue_comparator);
+		PriorityQueue<TreeNodeDecorator<NodeType>> queue =  new PriorityQueue<>(alphabet.size(), queue_comparator);
 		for (NodeType node : alphabet)
 		{
-			queue.add(new TreeNodeDecorator(node));
+			queue.add(new TreeNodeDecorator<NodeType>(node));
 		}
 		
 		TreeNodeDecorator first = null;
@@ -95,7 +97,7 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 	 * @param subTreeIndex
 	 * BEHOLD THE POWER OF GLORIOUS RECURSION!
 	 */
-	private void moveTreeNode(TreeNodeDecorator mainTree, int mainTreeIndex, TreeNodeDecorator subTreeNode, int subTreeIndex)
+	private void moveTreeNode(TreeNodeDecorator<NodeType> mainTree, int mainTreeIndex, TreeNodeDecorator<NodeType> subTreeNode, int subTreeIndex)
 	{
 		if(mainTreeIndex == 0 || subTreeIndex == 0)
 		{
@@ -112,5 +114,10 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 		{
 			moveTreeNode(mainTree, HuffmanTreeNode.rightChild(mainTreeIndex), subTreeNode, HuffmanTreeNode.rightChild(subTreeIndex));
 		}
+	}
+	
+	public HashMap<NodeType, Integer> getCodeDictionary()
+	{
+		return m_Tree.getCodes();
 	}
 }
