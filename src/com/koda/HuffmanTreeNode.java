@@ -62,4 +62,9 @@ public class HuffmanTreeNode
 	{
 		return parentIndex * 2 + 1; 
 	}
+
+	public void print() {
+		// TODO Auto-generated method stub
+		
+	}
 }

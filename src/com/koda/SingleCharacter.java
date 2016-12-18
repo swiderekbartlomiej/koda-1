@@ -51,4 +51,10 @@ public class SingleCharacter extends HuffmanTreeNode
 		int prime = 17;
 		return prime + (m_Symbol != null ? m_Symbol.hashCode() : 0);
 	}
+	
+	// Drukuje jakie wartosci symboli są w SingleCharacter i wagę węzła
+	@Override
+	public void print (){
+		System.out.println(m_Symbol+" "+super.getWeight());
+	}
 }
