@@ -52,7 +52,7 @@ public class App {
 	     test_alphabet.add(new SingleCharacter('s', 9));
 	     
 	     HuffmanTree<SingleCharacter> huff_tree = new HuffmanTree<>(test_alphabet);
-	     HashMap<SingleCharacter, Integer> codes = huff_tree.getCodeDictionary();
+	     HashMap<SingleCharacter, BinaryBox> codes = huff_tree.getCodeDictionary();
 	}
 
 }

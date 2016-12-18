@@ -116,7 +116,7 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 		}
 	}
 	
-	public HashMap<NodeType, Integer> getCodeDictionary()
+	public HashMap<NodeType, BinaryBox> getCodeDictionary()
 	{
 		return m_Tree.getCodes();
 	}

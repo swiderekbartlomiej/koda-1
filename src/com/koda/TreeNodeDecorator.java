@@ -144,7 +144,7 @@ public class TreeNodeDecorator<NodeType>
 		return val;
 	}
 	
-	private void getNodeCode(int currentCode, int index, HashMap<NodeType, Integer> codes)
+	private void getNodeCode(StringBuilder sb, int index, HashMap<NodeType, BinaryBox> codes)
 	{
 		if(index > m_Tree.size() - 1)
 		{
@@ -157,8 +157,10 @@ public class TreeNodeDecorator<NodeType>
 		{
 			if(m_Tree.get(HuffmanTreeNode.leftChild(index)) != null)
 			{
+				StringBuilder new_sb = new StringBuilder(sb.toString());
+				new_sb.append("0");
 				has_children = true;
-				getNodeCode(HuffmanTreeNode.codeLeftNodeMove(currentCode), HuffmanTreeNode.leftChild(index), codes);
+				getNodeCode(new_sb, HuffmanTreeNode.leftChild(index), codes);
 			}
 		}
 		
@@ -166,14 +168,19 @@ public class TreeNodeDecorator<NodeType>
 		{
 			if(m_Tree.get(HuffmanTreeNode.rightChild(index)) != null)
 			{
+				StringBuilder new_sb = new StringBuilder(sb.toString());
+				new_sb.append("1");
 				has_children = true;
-				getNodeCode(HuffmanTreeNode.codeRightNodeMove(currentCode), HuffmanTreeNode.rightChild(index), codes);
+				getNodeCode(new_sb, HuffmanTreeNode.rightChild(index), codes);
 			}
 		}
 		
 		if(has_children == false)
 		{
-			codes.put((NodeType)m_Tree.get(index), currentCode);
+			StringBuilder final_code_string = new StringBuilder(sb.toString());
+			int bin_int = Integer.parseInt(final_code_string.reverse().toString(), 2);
+			BinaryBox bin_box = new BinaryBox(bin_int, final_code_string.length());
+			codes.put((NodeType)m_Tree.get(index), bin_box);
 			return;
 		}
 		else
@@ -182,10 +189,11 @@ public class TreeNodeDecorator<NodeType>
 		}
 	}
 	
-	public HashMap<NodeType, Integer> getCodes()
+	public HashMap<NodeType, BinaryBox> getCodes()
 	{
-		HashMap<NodeType, Integer> codes = new HashMap<>();
-		getNodeCode(0, ROOT_INDEX, codes);
+		HashMap<NodeType, BinaryBox> codes = new HashMap<>();
+		StringBuilder code_string = new StringBuilder();
+		getNodeCode(code_string, ROOT_INDEX, codes);
 		return codes;
 	}
 }
