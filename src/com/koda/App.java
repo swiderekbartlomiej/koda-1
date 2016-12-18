@@ -27,15 +27,17 @@ public class App {
 	     //ourReader.printListContextCharacter(ourReader.readToContextCharacter());
 	     
 	    // Poniżej przykład użycia zapisu do pliku binarnego, na randomowych danych. Docelowo będzie dostarczał je tłumacz.
-	    CodeWriter cw = new CodeWriter();
-	    ArrayList<Integer> al = new ArrayList<>();
-	    al.add(175);
-	    al.add(268);
-	    al.add(252);
-	    al.add(469);
-	    al.add(1024);
-	    al.add(777);
-	    cw.saveCodeToFile(al);
+//	    CodeWriter cw = new CodeWriter();
+//	    ArrayList<Integer> al = new ArrayList<>();
+//	    al.add(175);
+//	    al.add(268);
+//	    al.add(252);
+//	    al.add(469);
+//	    al.add(1024);
+//	    al.add(777);
+//	    cw.saveCodeToFile(al);
+	    
+	 // TEST DLA SINGLE CHARACTER #####################################################
 	     
 	     ArrayList<SingleCharacter> test_alphabet = new ArrayList<>();
 	     test_alphabet.add(new SingleCharacter('a', 10));
@@ -53,6 +55,76 @@ public class App {
 	     
 	     HuffmanTree<SingleCharacter> huff_tree = new HuffmanTree<>(test_alphabet);
 	     HashMap<SingleCharacter, BinaryBox> codes = huff_tree.getCodeDictionary();
+	     
+	     
+	     ArrayList<String> test_input = new ArrayList<>();
+	     test_input.add("d");
+	     test_input.add("o");
+	     test_input.add("o");
+	     test_input.add("p");
+	     test_input.add("a");
+	     
+	     Translator test_translator = new Translator();
+	     ArrayList codesList = test_translator.translateSC(codes, test_input);
+	     
+	     CodeWriter cw = new CodeWriter();
+	     
+	     cw.saveCodeToFile(codesList, codes);
+	     
+		 // KONIEC TESTU DLA DLA SINGLE CHARACTER #####################################################
+
+	     
+	     // TEST DLA TWO CHARACTERS #####################################################
+	     
+//	     ArrayList<TwoCharacters> test_alphabet_tc = new ArrayList<>();
+//	     test_alphabet_tc.add(new TwoCharacters('d','u', 12));
+//	     test_alphabet_tc.add(new TwoCharacters('p','a', 3));
+//	     test_alphabet_tc.add(new TwoCharacters('b','i', 8));
+//	     test_alphabet_tc.add(new TwoCharacters('s','k', 11));
+//	     test_alphabet_tc.add(new TwoCharacters('u','p', 6));
+//	     test_alphabet_tc.add(new TwoCharacters('a','$', 4));
+//	     
+//	     HuffmanTree<TwoCharacters> huff_tree_tc = new HuffmanTree<>(test_alphabet_tc);
+//	     HashMap<TwoCharacters, BinaryBox> codes_tc = huff_tree_tc.getCodeDictionary();
+//	     
+//	     ArrayList<String> test_input_tc = new ArrayList<>();
+//	     test_input_tc.add("du");
+//	     test_input_tc.add("pa");
+//	     test_input_tc.add("bi");
+//	     test_input_tc.add("sk");
+//	     test_input_tc.add("up");
+//	     test_input_tc.add("a$");
+//	     
+//	     Translator test_translator = new Translator();
+//	     test_translator.translateTC(codes_tc, test_input_tc);
+	     
+//	     KONIEC TESTU DLA TWO CHARACTERS #################################################
+	     
+//	     TEST DLA CONTEXTCHARACTER #######################################################
+	     
+//	     ArrayList<ContextCharacter> test_alphabet_cc = new ArrayList<>();
+//	     test_alphabet_cc.add(new ContextCharacter('d','^', 12));
+//	     test_alphabet_cc.add(new ContextCharacter('o','d', 3));
+//	     test_alphabet_cc.add(new ContextCharacter('o','o', 8));
+//	     test_alphabet_cc.add(new ContextCharacter('p','o', 11));
+//	     test_alphabet_cc.add(new ContextCharacter('a','p', 6));
+//	     test_alphabet_cc.add(new ContextCharacter('l','a', 4));
+//	     
+//	     HuffmanTree<ContextCharacter> huff_tree_cc = new HuffmanTree<>(test_alphabet_cc);
+//	     HashMap<ContextCharacter, BinaryBox> codes_cc = huff_tree_cc.getCodeDictionary();
+//	     
+//	     ArrayList<String> test_input_cc = new ArrayList<>();
+//	     test_input_cc.add("^d");
+//	     test_input_cc.add("do");
+//	     test_input_cc.add("oo");
+//	     test_input_cc.add("op");
+//	     test_input_cc.add("pa");
+//	     test_input_cc.add("al");
+//	     
+//	     Translator test_translator = new Translator();
+//	     test_translator.translateCC(codes_cc, test_input_cc);
+	     
+//	     KONIEC TESTU DLA CONTEXTCHARACTER #############################################
 	}
 
 }

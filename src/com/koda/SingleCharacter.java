@@ -57,4 +57,10 @@ public class SingleCharacter extends HuffmanTreeNode
 	public void print (){
 		System.out.println(m_Symbol+" "+super.getWeight());
 	}
+
+	@Override
+	public String getValue() {
+		return m_Symbol.toString();
+		
+	}
 }
