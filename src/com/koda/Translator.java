@@ -12,13 +12,14 @@ public class Translator {
 	 * @param inputList ArrayList symboli wejściowych
 	 * @return ArrayList przetłumaczonych na kod symboli wejściowych
 	 */
-	public static ArrayList translateSC(HashMap<SingleCharacter, Integer> disctionaryHashMap, ArrayList<String> inputList){
+	public static ArrayList translateSC(HashMap<SingleCharacter, BinaryBox> disctionaryHashMap, ArrayList<String> inputList){
 		ArrayList<Integer> codedInputList = new ArrayList();
 		
 		for (String inputWord : inputList){
-			for (Map.Entry<SingleCharacter, Integer> entry : disctionaryHashMap.entrySet()){
+			for (Map.Entry<SingleCharacter, BinaryBox> entry : disctionaryHashMap.entrySet()){
 				if (inputWord.equals(entry.getKey().getSymbol().toString())){
-					codedInputList.add(entry.getValue());
+					System.out.println("Symbol: "+inputWord+" kod:"+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2));
+					codedInputList.add(entry.getValue().getValue());
 				}
 			}
 		}
@@ -31,18 +32,16 @@ public class Translator {
 	 * @param inputList ArrayList symboli wejściowych
 	 * @return ArrayList przetłumaczonych na kod symboli wejściowych
 	 */
-	public static ArrayList translateTC(HashMap<TwoCharacters, Integer> disctionaryHashMap, ArrayList<String> inputList){
+	public static ArrayList translateTC(HashMap<TwoCharacters, BinaryBox> disctionaryHashMap, ArrayList<String> inputList){
 		ArrayList<Integer> codedInputList = new ArrayList();
 		
 		for (String inputWord : inputList){
-			for (Map.Entry<TwoCharacters, Integer> entry : disctionaryHashMap.entrySet()){
+			for (Map.Entry<TwoCharacters, BinaryBox> entry : disctionaryHashMap.entrySet()){
 				if (inputWord.charAt(0)==entry.getKey().getCharacters()[0] &&  inputWord.charAt(1)==entry.getKey().getCharacters()[1]){
-					codedInputList.add(entry.getValue());
+					codedInputList.add(entry.getValue().getValue());
+					System.out.println("Symbol: "+inputWord+" kod: "+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2));
 				}
 			}
-		}
-		for (int x: codedInputList){
-			System.out.println(Integer.toString(x));
 		}
 		return codedInputList;
 	}
@@ -52,13 +51,14 @@ public class Translator {
 	 * @param inputList ArrayList symboli wejściowych
 	 * @return ArrayList przetłumaczonych na kod symboli wejściowych
 	 */
-	public static ArrayList translateCC(HashMap<ContextCharacter, Integer> disctionaryHashMap, ArrayList<String> inputList){
+	public static ArrayList translateCC(HashMap<ContextCharacter, BinaryBox> disctionaryHashMap, ArrayList<String> inputList){
 		ArrayList<Integer> codedInputList = new ArrayList();
 		
 		for (String inputWord : inputList){
-			for (Map.Entry<ContextCharacter, Integer> entry : disctionaryHashMap.entrySet()){
+			for (Map.Entry<ContextCharacter, BinaryBox> entry : disctionaryHashMap.entrySet()){
 				if (inputWord.charAt(0)==entry.getKey().getCharacters()[1] &&  inputWord.charAt(1)==entry.getKey().getCharacters()[0]){
-					codedInputList.add(entry.getValue());
+					codedInputList.add(entry.getValue().getValue());
+					System.out.println("Symbol: "+inputWord+" kod: "+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2));
 				}
 			}
 		}
