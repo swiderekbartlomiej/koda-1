@@ -77,4 +77,9 @@ public class TwoCharacters extends HuffmanTreeNode
 	public void print(){
 		System.out.println(m_Characters[0]+""+m_Characters[1]+" "+super.getWeight());
 	}
+
+	@Override
+	public String getValue() {
+		return m_Characters[0].toString()+m_Characters[1].toString();
+	}
 }

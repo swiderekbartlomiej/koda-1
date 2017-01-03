@@ -74,7 +74,12 @@ public class HuffmanTreeNode
 		return ++currentCode;
 	}
 	
-	public void print() 
-	{
+	public String getValue(){
+		return null;
+	}
+
+	public void print() {
+		// TODO Auto-generated method stub
+		
 	}
 }

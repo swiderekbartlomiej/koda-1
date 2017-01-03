@@ -4,16 +4,18 @@ import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Klasa obsługująca zapis zakodowanego tekstu do pliku.
  * @author koda
  *
  */
-public class CodeWriter {
+public class CodeWriter<NodeType extends HuffmanTreeNode> {
 	
 	//Do tej listy buduje BinaryBox'y wypełnione kodem
 	private List<Integer> outputlistOfIntMagazines = new ArrayList<>();
@@ -23,7 +25,7 @@ public class CodeWriter {
 	 * Przyjmuje od tłumacza ArrayListe syboli w zakodowanej postaci, i zapisuje je nieredundantnie do pliku.
 	 * @param listOfCodeWords lista zakodowanych symboli, podawana przez tłumacza
 	 */
-	public void saveCodeToFile(ArrayList listOfCodeWords){
+	public void saveCodeToFile(ArrayList listOfCodeWords, HashMap<NodeType, BinaryBox> dictionary){
 		
 		BinaryBox actualBox = new BinaryBox();
 		int partA;
@@ -66,6 +68,15 @@ public class CodeWriter {
 		
 		
 		try {
+			PrintWriter dictionaryOut = new PrintWriter("/home/koda/gen-bin2-dic");
+			for (Map.Entry<NodeType, BinaryBox> entry : dictionary.entrySet()){
+				dictionaryOut.write("{");
+				dictionaryOut.write(entry.getKey().getValue());
+				dictionaryOut.write("=");
+				dictionaryOut.write(entry.getValue().getValue().toString());
+				dictionaryOut.write("}");
+			}
+			dictionaryOut.close();
 			DataOutputStream out = new DataOutputStream(new FileOutputStream("/home/koda/gen-bin2"));
 			for (int x : this.outputlistOfIntMagazines){
 				out.writeInt(x);
