@@ -34,6 +34,16 @@ public class TwoCharacters extends HuffmanTreeNode
 		return m_Characters;
 	}
 	
+	public Character getFirst()
+	{
+		return m_Characters[0];
+	}
+	
+	public Character getSecond()
+	{
+		return m_Characters[1];
+	}
+	
 	private boolean equals(TwoCharacters other)
 	{
 		if(m_Characters[0] == other.m_Characters[0])

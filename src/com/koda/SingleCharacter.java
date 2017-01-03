@@ -3,6 +3,7 @@ package com.koda;
 public class SingleCharacter extends HuffmanTreeNode
 {
 	private Character m_Symbol;
+	private int m_HashSeed = 17;
 	
 	public SingleCharacter()
 	{
@@ -48,8 +49,8 @@ public class SingleCharacter extends HuffmanTreeNode
 	@Override
 	public int hashCode()
 	{
-		int prime = 17;
-		return prime + (m_Symbol != null ? m_Symbol.hashCode() : 0);
+		m_HashSeed = 31 * m_HashSeed + (int)m_Symbol;
+		return m_HashSeed;
 	}
 	
 	// Drukuje jakie wartosci symboli są w SingleCharacter i wagę węzła
