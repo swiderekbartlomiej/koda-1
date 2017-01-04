@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 //import org.opencv.core.Core;
 //import org.opencv.core.CvType;
 //import org.opencv.core.Mat;
@@ -51,7 +52,7 @@ public class App {
 	    
 	 // TEST DLA SINGLE CHARACTER #####################################################
 	     
-<<<<<<< HEAD
+
 //	     ArrayList<SingleCharacter> test_alphabet = new ArrayList<>();
 //	     test_alphabet.add(new SingleCharacter('a', 10));
 //	     test_alphabet.add(new SingleCharacter('b', 14));
@@ -92,7 +93,7 @@ public class App {
 //		{
 //	    	System.out.println("Char: " + entry.getKey().getFirst() + entry.getKey().getSecond() + " Code:" + entry.getValue().getValue() + " Space:" + entry.getValue().returnFreeSpace());
 //		}
-=======
+	     
 	     ArrayList<SingleCharacter> test_alphabet = new ArrayList<>();
 	     test_alphabet.add(new SingleCharacter('a', 10));
 	     test_alphabet.add(new SingleCharacter('b', 14));
@@ -112,11 +113,19 @@ public class App {
 	     
 	     
 	     ArrayList<String> test_input = new ArrayList<>();
+	     test_input.add("a");
+	     test_input.add("b");
+	     test_input.add("c");
 	     test_input.add("d");
-	     test_input.add("o");
+	     test_input.add("e");
+	     test_input.add("l");
+	     test_input.add("g");
+	     test_input.add("z");
+	     test_input.add("y");
+	     test_input.add("x");
 	     test_input.add("o");
 	     test_input.add("p");
-	     test_input.add("a");
+	     test_input.add("s");
 	     
 	     Translator test_translator = new Translator();
 	     ArrayList codesList = test_translator.translateSC(codes, test_input);
@@ -124,6 +133,7 @@ public class App {
 	     CodeWriter cw = new CodeWriter();
 	     
 	     cw.saveCodeToFile(codesList, codes);
+	     
 	     
 		 // KONIEC TESTU DLA DLA SINGLE CHARACTER #####################################################
 
@@ -179,7 +189,6 @@ public class App {
 //	     test_translator.translateCC(codes_cc, test_input_cc);
 	     
 //	     KONIEC TESTU DLA CONTEXTCHARACTER #############################################
->>>>>>> e4ed22070871c81fe64adca66f1dda306100c97a
 	}
 
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Klasa obsługująca zapis zakodowanego tekstu do pliku.
@@ -28,38 +29,39 @@ public class CodeWriter<NodeType extends HuffmanTreeNode> {
 	public void saveCodeToFile(ArrayList listOfCodeWords, HashMap<NodeType, BinaryBox> dictionary){
 		
 		BinaryBox actualBox = new BinaryBox();
-		int partA;
-		int partB;
+		String partA; //int
+		String partB; //int
 		int partBMask;
 		
 		for (Object codeWord : listOfCodeWords){
-			int intCodeWord = (int)codeWord;
-			if (actualBox.returnFreeSpace() >= calcSignificantBits(intCodeWord)){
-				actualBox.shiftLeft(calcSignificantBits(intCodeWord));
+			int intCodeWord = Integer.parseInt(codeWord.toString(),2);
+			//System.out.println(intCodeWord);
+			if (actualBox.returnFreeSpace() >= codeWord.toString().length()){	//calcSignificantBits(intCodeWord)){
+				actualBox.shiftLeft(codeWord.toString().length());
 				actualBox.appendValue(intCodeWord);
-				actualBox.increaseSpaceUsed(calcSignificantBits(intCodeWord));
+				actualBox.increaseSpaceUsed(codeWord.toString().length());
 			}else if (actualBox.returnFreeSpace() > 0){
-				int shitfValue = calcSignificantBits(intCodeWord)-actualBox.returnFreeSpace();
-				partA = intCodeWord >> shitfValue;
-				actualBox.shiftLeft(calcSignificantBits(partA));
-				actualBox.appendValue(partA);
-				actualBox.increaseSpaceUsed(calcSignificantBits(partA));
+				int shitfValue = codeWord.toString().length()-actualBox.returnFreeSpace();
+				partA = codeWord.toString().substring(0, codeWord.toString().length()-shitfValue);  //partA = intCodeWord >> shitfValue;
+				actualBox.shiftLeft(partA.length());
+				actualBox.appendValue(Integer.parseInt(partA,2));
+				actualBox.increaseSpaceUsed(partA.length());
 				
 				outputlistOfIntMagazines.add(actualBox.getValue());
 				
 				actualBox = new BinaryBox();
 
-				partBMask = (int) Math.pow(2, shitfValue)-1;
-				partB = intCodeWord&partBMask;
+				//partBMask = (int) Math.pow(2, shitfValue)-1;
+				partB = codeWord.toString().substring(codeWord.toString().length()-shitfValue);//partB = intCodeWord&partBMask;
 				
-				actualBox.appendValue(partB);
-				actualBox.increaseSpaceUsed(shitfValue);
+				actualBox.appendValue(Integer.parseInt(partB,2));
+				actualBox.increaseSpaceUsed(partB.length());
 				
 			}else{
 				outputlistOfIntMagazines.add(actualBox.getValue());
 				actualBox = new BinaryBox();
-				actualBox.shiftLeft(calcSignificantBits(intCodeWord));
-				actualBox.increaseSpaceUsed(calcSignificantBits(intCodeWord));
+				actualBox.shiftLeft(codeWord.toString().length());
+				actualBox.increaseSpaceUsed(codeWord.toString().length());
 				actualBox.appendValue(intCodeWord);
 			}
 		}
@@ -74,6 +76,8 @@ public class CodeWriter<NodeType extends HuffmanTreeNode> {
 				dictionaryOut.write(entry.getKey().getValue());
 				dictionaryOut.write("=");
 				dictionaryOut.write(entry.getValue().getValue().toString());
+				dictionaryOut.write("=");
+				dictionaryOut.write(Integer.toString((32-entry.getValue().returnFreeSpace())));
 				dictionaryOut.write("}");
 			}
 			dictionaryOut.close();
