@@ -94,6 +94,8 @@ public class App {
 //	    	System.out.println("Char: " + entry.getKey().getFirst() + entry.getKey().getSecond() + " Code:" + entry.getValue().getValue() + " Space:" + entry.getValue().returnFreeSpace());
 //		}
 	     
+//	     V2
+	     
 	     ArrayList<SingleCharacter> test_alphabet = new ArrayList<>();
 	     test_alphabet.add(new SingleCharacter('a', 10));
 	     test_alphabet.add(new SingleCharacter('b', 14));
@@ -160,7 +162,11 @@ public class App {
 //	     test_input_tc.add("a$");
 //	     
 //	     Translator test_translator = new Translator();
-//	     test_translator.translateTC(codes_tc, test_input_tc);
+//	     ArrayList codesList_tc = test_translator.translateTC(codes_tc, test_input_tc);
+//	     
+//	     CodeWriter cw = new CodeWriter();
+//	     
+//	     cw.saveCodeToFile(codesList_tc, codes_tc);
 	     
 //	     KONIEC TESTU DLA TWO CHARACTERS #################################################
 	     
@@ -186,7 +192,11 @@ public class App {
 //	     test_input_cc.add("al");
 //	     
 //	     Translator test_translator = new Translator();
-//	     test_translator.translateCC(codes_cc, test_input_cc);
+//	     ArrayList codesList_cc = test_translator.translateCC(codes_cc, test_input_cc);
+//	     
+//	     CodeWriter cw = new CodeWriter();
+//	     
+//	     cw.saveCodeToFile(codesList_cc, codes_cc);
 	     
 //	     KONIEC TESTU DLA CONTEXTCHARACTER #############################################
 	}
