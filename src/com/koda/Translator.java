@@ -14,15 +14,17 @@ public class Translator {
 	 */
 	public static ArrayList translateSC(HashMap<SingleCharacter, BinaryBox> disctionaryHashMap, ArrayList<String> inputList){
 		ArrayList<String> codedInputList = new ArrayList();
-		
+		int codeWordSumSize = new Integer(0);
 		for (String inputWord : inputList){
 			for (Map.Entry<SingleCharacter, BinaryBox> entry : disctionaryHashMap.entrySet()){
 				if (inputWord.equals(entry.getKey().getSymbol().toString())){
 					System.out.println("Symbol: "+inputWord+" kod:"+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2)+" rozmiar:"+(32-entry.getValue().returnFreeSpace()));
 					codedInputList.add(leftPad(Integer.toString(entry.getValue().getValue(),2),32-entry.getValue().returnFreeSpace()-Integer.toString(entry.getValue().getValue(),2).length(),"0"));
+					codeWordSumSize+=(32-entry.getValue().returnFreeSpace());
 				}
 			}
 		}
+		System.out.println("Średnia długość bitowa słowa wyjściowego: "+(float)codeWordSumSize/codedInputList.size()+" ("+codedInputList.size()+" słów kodowych)");
 		return codedInputList;
 	}
 	
@@ -34,15 +36,17 @@ public class Translator {
 	 */
 	public static ArrayList translateTC(HashMap<TwoCharacters, BinaryBox> disctionaryHashMap, ArrayList<String> inputList){
 		ArrayList<String> codedInputList = new ArrayList();
-		
+		int codeWordSumSize = new Integer(0);
 		for (String inputWord : inputList){
 			for (Map.Entry<TwoCharacters, BinaryBox> entry : disctionaryHashMap.entrySet()){
 				if (inputWord.charAt(0)==entry.getKey().getCharacters()[0] &&  inputWord.charAt(1)==entry.getKey().getCharacters()[1]){
 					codedInputList.add(leftPad(Integer.toString(entry.getValue().getValue(),2),32-entry.getValue().returnFreeSpace()-Integer.toString(entry.getValue().getValue(),2).length(),"0"));
 					System.out.println("Symbol: "+inputWord+" kod:"+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2)+" rozmiar:"+(32-entry.getValue().returnFreeSpace()));
+					codeWordSumSize+=(32-entry.getValue().returnFreeSpace());
 				}
 			}
 		}
+		System.out.println("Średnia długość bitowa słowa wyjściowego: "+(float)codeWordSumSize/codedInputList.size()+" ("+codedInputList.size()+" słów kodowych)");
 		return codedInputList;
 	}
 	/**
@@ -53,15 +57,17 @@ public class Translator {
 	 */
 	public static ArrayList translateCC(HashMap<ContextCharacter, BinaryBox> disctionaryHashMap, ArrayList<String> inputList){
 		ArrayList<String> codedInputList = new ArrayList();
-		
+		int codeWordSumSize = new Integer(0);
 		for (String inputWord : inputList){
 			for (Map.Entry<ContextCharacter, BinaryBox> entry : disctionaryHashMap.entrySet()){
 				if (inputWord.charAt(0)==entry.getKey().getCharacters()[1] &&  inputWord.charAt(1)==entry.getKey().getCharacters()[0]){
 					codedInputList.add(leftPad(Integer.toString(entry.getValue().getValue(),2),32-entry.getValue().returnFreeSpace()-Integer.toString(entry.getValue().getValue(),2).length(),"0"));
 					System.out.println("Symbol: "+inputWord+" kod:"+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2)+" rozmiar:"+(32-entry.getValue().returnFreeSpace()));
+					codeWordSumSize+=(32-entry.getValue().returnFreeSpace());
 				}
 			}
 		}
+		System.out.println("Średnia długość bitowa słowa wyjściowego: "+(float)codeWordSumSize/codedInputList.size()+" ("+codedInputList.size()+" słów kodowych)");
 		return codedInputList;
 	}
 	
