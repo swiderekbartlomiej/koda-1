@@ -161,7 +161,7 @@ public class InputReader {
 		ArrayList<SingleCharacter> arrayListStatisticMap = new ArrayList();
 		for (Map.Entry<String, Integer> entry : statisticMap.entrySet()){
 			arrayListStatisticMap.add(new SingleCharacter(entry.getKey().toCharArray()[0], entry.getValue()));
-//			System.out.println(entry.getKey().toCharArray()[0]+" "+entry.getValue());
+			//System.out.println(entry.getKey().toCharArray()[0]+" "+entry.getValue());
 		}
 		return arrayListStatisticMap;
 	}
