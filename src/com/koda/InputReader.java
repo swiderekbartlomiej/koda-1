@@ -25,17 +25,18 @@ public class InputReader {
 	private HashMap<String, Integer> statisticMap = new HashMap<String, Integer>();
 	
 	//Struktury które bedziemy zwracac w zaleznosci od opcji dzialania
-	private List<SingleCharacter> listSingleCharacter = new ArrayList();
-	private List<TwoCharacters> listTwoCharacters = new ArrayList();
-	private List<ContextCharacter> listContextCharacter = new ArrayList();
+	private ArrayList<SingleCharacter> listSingleCharacter = new ArrayList();
+	private ArrayList<TwoCharacters> listTwoCharacters = new ArrayList();
+	private ArrayList<ContextCharacter> listContextCharacter = new ArrayList();
 	
 	public InputReader (String path){
 		this.path=path;
 	}
 	
 	// czyta plik wejsciowy dla metody SingleCharacter, generujac przy tym statystykę
-	public List<SingleCharacter> readToSingleCharacter (){
+	public ArrayList<SingleCharacter> readToSingleCharacter (){
 		try {
+			statisticMap = new HashMap<String, Integer>(); //zerowanie mapy statystyk
 			Scanner scanner =  new Scanner ( new BufferedReader ( new FileReader(this.path)));
 			scanner.useDelimiter("");
 			while (scanner.hasNext())
@@ -61,6 +62,7 @@ public class InputReader {
 	// czyta plik wejsciowy dla metody TwoCharacters, generujac przy tym statystykę
 	public List<TwoCharacters> readToTwoCharacters (){
 		try {
+			statisticMap = new HashMap<String, Integer>(); //zerowanie mapy statystyk
 			Scanner scanner =  new Scanner ( new BufferedReader ( new FileReader(this.path)));
 			scanner.useDelimiter("");
 			while (scanner.hasNext())
@@ -88,6 +90,7 @@ public class InputReader {
 	// czyta plik wejsciowy dla metody ContextCharacter, generujac przy tym statystykę
 	public List<ContextCharacter> readToContextCharacter(){
 		try {
+			statisticMap = new HashMap<String, Integer>(); // zerowanie mapy statystyk
 			Scanner scanner =  new Scanner ( new BufferedReader ( new FileReader(this.path)));
 			scanner.useDelimiter("");
 			String firstChar="^"; // W MIŁOŚCI DO BASHA TAK ZOSTAŁEM WYCHOWANY!
@@ -127,6 +130,18 @@ public class InputReader {
 		}
 	}
 	
+	public ArrayList<SingleCharacter> getListSingleCharacter (){
+		return listSingleCharacter;
+	}
+	
+	public ArrayList<TwoCharacters> getlistTwoCharacters (){
+		return listTwoCharacters;
+	}
+	
+	public ArrayList<ContextCharacter> getlistContextCharacter (){
+		return listContextCharacter;
+	}
+	
 	// Drukuje zawartość listy z TwoCharacters
 	public void printListTwoCharacters(List<TwoCharacters> list){
 		for (int i=0; i<list.size(); i++){
@@ -141,9 +156,14 @@ public class InputReader {
 		}
 	}
 	
-	// Zwraca mapę ze statystykami
-	public HashMap<String, Integer> returnStatisticHashMap (){
-		return statisticMap;
+	// Zwraca mapę ze statystykami dla SingleCHaracter
+	public ArrayList<SingleCharacter> returnStatisticHashMapSC (){
+		ArrayList<SingleCharacter> arrayListStatisticMap = new ArrayList();
+		for (Map.Entry<String, Integer> entry : statisticMap.entrySet()){
+			arrayListStatisticMap.add(new SingleCharacter(entry.getKey().toCharArray()[0], entry.getValue()));
+//			System.out.println(entry.getKey().toCharArray()[0]+" "+entry.getValue());
+		}
+		return arrayListStatisticMap;
 	}
 	
 	// Zwraca listę elementow wejsciowych
@@ -152,7 +172,8 @@ public class InputReader {
 	}
 	
 	// Drukuje mape statystyki
-	private void printStatisticHashMap(){
+	public void printStatisticHashMap(){
+		System.out.println("Mapa symbol=ilośc_wystapien :");
 		System.out.println(Arrays.asList(statisticMap));
 	}
 

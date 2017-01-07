@@ -12,10 +12,12 @@ public class Translator {
 	 * @param inputList ArrayList symboli wejściowych
 	 * @return ArrayList przetłumaczonych na kod symboli wejściowych
 	 */
-	public static ArrayList translateSC(HashMap<SingleCharacter, BinaryBox> disctionaryHashMap, ArrayList<String> inputList){
+	public static ArrayList translateSC(HashMap<SingleCharacter, BinaryBox> disctionaryHashMap, ArrayList<SingleCharacter> inputList){
 		ArrayList<String> codedInputList = new ArrayList();
+		String inputWord;
 		int codeWordSumSize = new Integer(0);
-		for (String inputWord : inputList){
+		for (SingleCharacter inputSC : inputList){
+			inputWord = inputSC.getValue();
 			for (Map.Entry<SingleCharacter, BinaryBox> entry : disctionaryHashMap.entrySet()){
 				if (inputWord.equals(entry.getKey().getSymbol().toString())){
 					System.out.println("Symbol: "+inputWord+" kod:"+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2)+" rozmiar:"+(32-entry.getValue().returnFreeSpace()));

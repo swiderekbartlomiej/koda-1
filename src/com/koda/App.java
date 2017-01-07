@@ -1,8 +1,14 @@
 package com.koda;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 
 //import org.opencv.core.Core;
@@ -13,8 +19,9 @@ public class App {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		 //System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
 	     //Mat mat = Mat.eye( 3, 3, CvType.CV_8UC1 );
@@ -22,22 +29,11 @@ public class App {
 	     
 	     System.out.println("KOOOOOOOODAAAAA");
 	     
-	     //InputReader ourReader = new InputReader("/home/koda/gen.txt");
+//	     InputReader ourReader = new InputReader("/home/koda/gen.txt");
 	     // Poniżej wydruki ze wszystkich trzech metod, jako przykład.
-	     //ourReader.printListSingleCharacter(ourReader.readToSingleCharacter());
-	     //ourReader.printListTwoCharacters(ourReader.readToTwoCharacters());
-	     //ourReader.printListContextCharacter(ourReader.readToContextCharacter());
-	
-
-
-
-
-
-
-
-
-
-
+//	     ourReader.printListSingleCharacter(ourReader.readToSingleCharacter());
+//	     ourReader.printListTwoCharacters(ourReader.readToTwoCharacters());
+//	     ourReader.printListContextCharacter(ourReader.readToContextCharacter());
      
 	    // Poniżej przykład użycia zapisu do pliku binarnego, na randomowych danych. Docelowo będzie dostarczał je tłumacz.
 //	    CodeWriter cw = new CodeWriter();
@@ -94,51 +90,78 @@ public class App {
 //	    	System.out.println("Char: " + entry.getKey().getFirst() + entry.getKey().getSecond() + " Code:" + entry.getValue().getValue() + " Space:" + entry.getValue().returnFreeSpace());
 //		}
 	     
-//	     V2
+//	     V2 PRAWDZIWY POCZĄTEK TESTU DLA SINGLE CHARACTER
 	     
-	     ArrayList<SingleCharacter> test_alphabet = new ArrayList<>();
-	     test_alphabet.add(new SingleCharacter('a', 10));
-	     test_alphabet.add(new SingleCharacter('b', 14));
-	     test_alphabet.add(new SingleCharacter('c', 5));
-	     test_alphabet.add(new SingleCharacter('d', 20));
-	     test_alphabet.add(new SingleCharacter('l', 24));
-	     test_alphabet.add(new SingleCharacter('g', 7));
-	     test_alphabet.add(new SingleCharacter('z', 15));
-	     test_alphabet.add(new SingleCharacter('y', 16));
-	     test_alphabet.add(new SingleCharacter('x', 23));
-	     test_alphabet.add(new SingleCharacter('o', 12));
-	     test_alphabet.add(new SingleCharacter('p', 19));
-	     test_alphabet.add(new SingleCharacter('s', 9));
-	     
-	     HuffmanTree<SingleCharacter> huff_tree = new HuffmanTree<>(test_alphabet);
-	     HashMap<SingleCharacter, BinaryBox> codes = huff_tree.getCodeDictionary();
-	     
-	     
-	     ArrayList<String> test_input = new ArrayList<>();
-	     test_input.add("a");
-	     test_input.add("b");
-	     test_input.add("c");
-	     test_input.add("d");
-	     test_input.add("e");
-	     test_input.add("l");
-	     test_input.add("g");
-	     test_input.add("z");
-	     test_input.add("y");
-	     test_input.add("x");
-	     test_input.add("o");
-	     test_input.add("p");
-	     test_input.add("s");
-	     
-	     Translator test_translator = new Translator();
-	     ArrayList codesList = test_translator.translateSC(codes, test_input);
-	     
-	     CodeWriter cw = new CodeWriter();
-	     
-	     cw.saveCodeToFile(codesList, codes);
+//	     ArrayList<SingleCharacter> test_alphabet = new ArrayList<>();
+//	     test_alphabet.add(new SingleCharacter('a', 10));
+//	     test_alphabet.add(new SingleCharacter('b', 14));
+//	     test_alphabet.add(new SingleCharacter('c', 5));
+//	     test_alphabet.add(new SingleCharacter('d', 20));
+//	     test_alphabet.add(new SingleCharacter('l', 24));
+//	     test_alphabet.add(new SingleCharacter('g', 7));
+//	     test_alphabet.add(new SingleCharacter('z', 15));
+//	     test_alphabet.add(new SingleCharacter('y', 16));
+//	     test_alphabet.add(new SingleCharacter('x', 23));
+//	     test_alphabet.add(new SingleCharacter('o', 12));
+//	     test_alphabet.add(new SingleCharacter('p', 19));
+//	     test_alphabet.add(new SingleCharacter('s', 9));
+//	     
+//	     HuffmanTree<SingleCharacter> huff_tree = new HuffmanTree<>(test_alphabet);
+//	     HashMap<SingleCharacter, BinaryBox> codes = huff_tree.getCodeDictionary();
+//	     
+//	     
+//	     ArrayList<String> test_input = new ArrayList<>();
+//	     test_input.add("a");
+//	     test_input.add("b");
+//	     test_input.add("c");
+//	     test_input.add("d");
+//	     test_input.add("e");
+//	     test_input.add("l");
+//	     test_input.add("g");
+//	     test_input.add("z");
+//	     test_input.add("y");
+//	     test_input.add("x");
+//	     test_input.add("o");
+//	     test_input.add("p");
+//	     test_input.add("s");
+//	     
+//	     Translator test_translator = new Translator();
+//	     ArrayList codesList = test_translator.translateSC(codes, test_input);
+//	     
+//	     CodeWriter cw = new CodeWriter();
+//	     
+//	     cw.saveCodeToFile(codesList, codes);
 	     
 	     
 		 // KONIEC TESTU DLA DLA SINGLE CHARACTER #####################################################
-
+	     
+	     // TEST CAŁOŚCIOWY DLA SINGLE CHARACTER ####################################################
+	     
+	     InputReader ourReader = new InputReader("/home/koda/gen.txt"); 									//czyta plik wejsciowy
+	     ArrayList<SingleCharacter> alphabet = ourReader.readToSingleCharacter(); 							// ładuje plik do struktury SingleCharacter
+	     ourReader.printStatisticHashMap(); 																// drukuje mape sumbol-ilosc_wystapien
+	     
+	     
+	     HuffmanTree<SingleCharacter> huff_tree = new HuffmanTree<>(ourReader.returnStatisticHashMapSC());	//buduje drzewo
+	     HashMap<SingleCharacter, BinaryBox> dictionary = huff_tree.getCodeDictionary();					//wyjmuje słownik z drzewa
+	     
+	     DictionaryPrinter.printSCDictionary(dictionary);													// drukuje słownik - MA ON POWTÓRZENIA !
+	     
+//	     Translator test_translator = new Translator();
+//	     ArrayList codesList = test_translator.translateSC(codes, ourReader.getListSingleCharacter());
+	     
+	     // KONIEC TESTU CAŁOŚCIOWEGO DLA SINGLE CHARACTER ##########################################
+	     
+	     // TEST WCZYTYWANIA OBRAZÓW
+	     
+//	     BufferedImage bufferedImage = ImageIO.read(new File("/home/koda/lenaOriginal.png"));
+//	     
+//	     list<byte> imageBytList;
+//	     
+//	     byte[] pixels = ((DataBufferByte) bufferedImage.getRaster().getDataBuffer()).getData();
+	     
+	     // KONIEC TESTU WCZYTYWANIA OBRAZÓW
+	     
 	     
 	     // TEST DLA TWO CHARACTERS #####################################################
 	     
