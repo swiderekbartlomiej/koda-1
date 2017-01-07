@@ -141,8 +141,9 @@ public class App {
 	     ArrayList<SingleCharacter> alphabet = ourReader.readToSingleCharacter(); 							// ładuje plik do struktury SingleCharacter
 	     ourReader.printStatisticHashMap(); 																// drukuje mape sumbol-ilosc_wystapien
 	     
+	     alphabet = ourReader.returnStatisticHashMapSC();
 	     
-	     HuffmanTree<SingleCharacter> huff_tree = new HuffmanTree<>(ourReader.returnStatisticHashMapSC());	//buduje drzewo
+	     HuffmanTree<SingleCharacter> huff_tree = new HuffmanTree<>(alphabet);	//buduje drzewo
 	     HashMap<SingleCharacter, BinaryBox> dictionary = huff_tree.getCodeDictionary();					//wyjmuje słownik z drzewa
 	     
 	     DictionaryPrinter.printSCDictionary(dictionary);													// drukuje słownik - MA ON POWTÓRZENIA !
