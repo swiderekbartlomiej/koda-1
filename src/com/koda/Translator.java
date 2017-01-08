@@ -36,10 +36,12 @@ public class Translator {
 	 * @param inputList ArrayList symboli wejściowych
 	 * @return ArrayList przetłumaczonych na kod symboli wejściowych
 	 */
-	public static ArrayList translateTC(HashMap<TwoCharacters, BinaryBox> disctionaryHashMap, ArrayList<String> inputList){
+	public static ArrayList translateTC(HashMap<TwoCharacters, BinaryBox> disctionaryHashMap, ArrayList<TwoCharacters> inputList){
 		ArrayList<String> codedInputList = new ArrayList();
+		String inputWord;
 		int codeWordSumSize = new Integer(0);
-		for (String inputWord : inputList){
+		for (TwoCharacters inputTC : inputList){
+			inputWord = inputTC.getValue();
 			for (Map.Entry<TwoCharacters, BinaryBox> entry : disctionaryHashMap.entrySet()){
 				if (inputWord.charAt(0)==entry.getKey().getCharacters()[0] &&  inputWord.charAt(1)==entry.getKey().getCharacters()[1]){
 					codedInputList.add(leftPad(Integer.toString(entry.getValue().getValue(),2),32-entry.getValue().returnFreeSpace()-Integer.toString(entry.getValue().getValue(),2).length(),"0"));
@@ -57,10 +59,12 @@ public class Translator {
 	 * @param inputList ArrayList symboli wejściowych
 	 * @return ArrayList przetłumaczonych na kod symboli wejściowych
 	 */
-	public static ArrayList translateCC(HashMap<ContextCharacter, BinaryBox> disctionaryHashMap, ArrayList<String> inputList){
+	public static ArrayList translateCC(HashMap<ContextCharacter, BinaryBox> disctionaryHashMap, ArrayList<ContextCharacter> inputList){
 		ArrayList<String> codedInputList = new ArrayList();
+		String inputWord;
 		int codeWordSumSize = new Integer(0);
-		for (String inputWord : inputList){
+		for (ContextCharacter inputCC : inputList){
+			inputWord = inputCC.getValue();
 			for (Map.Entry<ContextCharacter, BinaryBox> entry : disctionaryHashMap.entrySet()){
 				if (inputWord.charAt(0)==entry.getKey().getCharacters()[1] &&  inputWord.charAt(1)==entry.getKey().getCharacters()[0]){
 					codedInputList.add(leftPad(Integer.toString(entry.getValue().getValue(),2),32-entry.getValue().returnFreeSpace()-Integer.toString(entry.getValue().getValue(),2).length(),"0"));
