@@ -46,14 +46,18 @@ public class TwoCharacters extends HuffmanTreeNode
 	
 	private boolean equals(TwoCharacters other)
 	{
-		if(m_Characters[0] == other.m_Characters[0])
+		if
+		(
+			(m_Characters[0] == other.m_Characters[0]) &&
+			(m_Characters[1] == other.m_Characters[1])
+		)
 		{
-			if(m_Characters[1] == other.m_Characters[1])
-			{
-				return true;
-			}
+			return true;
 		}
-		return false;
+		else
+		{
+			return false;
+		}
 	}
 	
 	@Override

@@ -33,7 +33,7 @@ public class SingleCharacter extends HuffmanTreeNode
 	
 	private boolean equals(SingleCharacter other)
 	{
-		return m_Symbol == other.m_Symbol;
+		return this.m_Symbol == other.m_Symbol;
 	}
 	
 	@Override
