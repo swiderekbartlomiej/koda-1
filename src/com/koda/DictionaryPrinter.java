@@ -18,5 +18,11 @@ public class DictionaryPrinter {
 			System.out.println("Klucz: "+entry.getKey().getSymbol().toString()+" wartość: "+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2));
 		}
 	}
+	
+	public static void printCCDictionary (HashMap<ContextCharacter, BinaryBox> disctionaryHashMap){
+		for (Map.Entry<ContextCharacter, BinaryBox> entry : disctionaryHashMap.entrySet()){
+			System.out.println("Klucz: "+entry.getKey().getSymbol().toString()+" wartość: "+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2));
+		}
+	}
 
 }

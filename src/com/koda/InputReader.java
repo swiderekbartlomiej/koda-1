@@ -60,7 +60,7 @@ public class InputReader {
 		return listSingleCharacter;
 	}
 	// czyta plik wejsciowy dla metody TwoCharacters, generujac przy tym statystykę
-	public List<TwoCharacters> readToTwoCharacters (){
+	public ArrayList<TwoCharacters> readToTwoCharacters (){
 		try {
 			statisticMap = new HashMap<String, Integer>(); //zerowanie mapy statystyk
 			Scanner scanner =  new Scanner ( new BufferedReader ( new FileReader(this.path)));
@@ -88,7 +88,7 @@ public class InputReader {
 	}
 	
 	// czyta plik wejsciowy dla metody ContextCharacter, generujac przy tym statystykę
-	public List<ContextCharacter> readToContextCharacter(){
+	public ArrayList<ContextCharacter> readToContextCharacter(){
 		try {
 			statisticMap = new HashMap<String, Integer>(); // zerowanie mapy statystyk
 			Scanner scanner =  new Scanner ( new BufferedReader ( new FileReader(this.path)));
@@ -166,6 +166,26 @@ public class InputReader {
 		return arrayListStatisticMap;
 	}
 	
+	// Zwraca mapę ze statystykami dla TwoCharacters
+	public ArrayList<TwoCharacters> returnStatisticHashMapTC (){
+		ArrayList<TwoCharacters> arrayListStatisticMap = new ArrayList();
+		for (Map.Entry<String, Integer> entry : statisticMap.entrySet()){
+			arrayListStatisticMap.add(new TwoCharacters(entry.getKey().toCharArray()[0],entry.getKey().toCharArray()[1], entry.getValue()));
+		}
+		return arrayListStatisticMap;
+	}
+	
+	// Zwraca mapę ze statystykami dla ContextCharacter
+	public ArrayList<ContextCharacter> returnStatisticHashMapCC (){
+		ArrayList<ContextCharacter> arrayListStatisticMap = new ArrayList();
+		for (Map.Entry<String, Integer> entry : statisticMap.entrySet()){
+			arrayListStatisticMap.add(new ContextCharacter(entry.getKey().toCharArray()[1],entry.getKey().toCharArray()[0], entry.getValue()));
+//			System.out.println(entry.getKey().toCharArray()[1]+"  "+entry.getKey().toCharArray()[0]+"  "+entry.getValue());
+			System.out.println("test_alphabet_cc.add(new ContextCharacter('"+entry.getKey().toCharArray()[1]+"','"+entry.getKey().toCharArray()[0]+"',"+entry.getValue()+"));");
+		}
+		return arrayListStatisticMap;
+	}
+	
 	// Zwraca listę elementow wejsciowych
 	public List<String> returnInputList (){
 		return inputList;
@@ -175,6 +195,7 @@ public class InputReader {
 	public void printStatisticHashMap(){
 		System.out.println("Mapa symbol=ilośc_wystapien :");
 		System.out.println(Arrays.asList(statisticMap));
+		System.out.println("Rozmiar: "+statisticMap.size());
 	}
 
 }
