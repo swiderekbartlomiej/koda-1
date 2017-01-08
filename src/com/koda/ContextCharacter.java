@@ -39,7 +39,18 @@ public class ContextCharacter extends TwoCharacters
 	
 	public boolean equals(ContextCharacter other)
 	{
-		return this.equals(other);
+		if
+		(
+			(other.m_Characters[0] == this.m_Characters[0]) &&
+			(other.m_Characters[1] == this.m_Characters[1])
+		)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	@Override

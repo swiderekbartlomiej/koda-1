@@ -8,5 +8,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/usr/lib/opencv/opencv-3.1.0/build/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/home/koda/Java libs/commons-cli-1.3.1/commons-cli-1.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

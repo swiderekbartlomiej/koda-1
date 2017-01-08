@@ -1,4 +1,4 @@
-package KODA_package;
+package com.koda;
 
 import java.nio.file.*;
 
