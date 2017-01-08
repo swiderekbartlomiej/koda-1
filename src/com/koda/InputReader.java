@@ -181,7 +181,6 @@ public class InputReader {
 		for (Map.Entry<String, Integer> entry : statisticMap.entrySet()){
 			arrayListStatisticMap.add(new ContextCharacter(entry.getKey().toCharArray()[1],entry.getKey().toCharArray()[0], entry.getValue()));
 //			System.out.println(entry.getKey().toCharArray()[1]+"  "+entry.getKey().toCharArray()[0]+"  "+entry.getValue());
-			System.out.println("test_alphabet_cc.add(new ContextCharacter('"+entry.getKey().toCharArray()[1]+"','"+entry.getKey().toCharArray()[0]+"',"+entry.getValue()+"));");
 		}
 		return arrayListStatisticMap;
 	}
