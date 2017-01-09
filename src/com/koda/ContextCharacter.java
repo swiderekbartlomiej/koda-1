@@ -36,29 +36,25 @@ public class ContextCharacter extends TwoCharacters
 	{
 		return m_Characters[1];
 	}
-	
-	public boolean equals(ContextCharacter other)
-	{
-		if
-		(
-			(other.m_Characters[0] == this.m_Characters[0]) &&
-			(other.m_Characters[1] == this.m_Characters[1])
-		)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+
 	
 	@Override
 	public boolean equals(Object other)
 	{
 		if((other instanceof ContextCharacter))
 		{
-			return this.equals((ContextCharacter)other);
+			if
+			(
+				(((ContextCharacter) other).getSymbol() == this.getSymbol()) &&
+				(((ContextCharacter) other).getSymbolContext() == this.getSymbol())
+			)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		return false;
 	}
