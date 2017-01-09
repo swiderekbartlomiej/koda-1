@@ -2,6 +2,8 @@ package com.koda;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 
 //import org.opencv.core.Core;
@@ -90,124 +94,49 @@ public class App {
 //	    	System.out.println("Char: " + entry.getKey().getFirst() + entry.getKey().getSecond() + " Code:" + entry.getValue().getValue() + " Space:" + entry.getValue().returnFreeSpace());
 //		}
 	     
-//	     V2 PRAWDZIWY POCZĄTEK TESTU DLA SINGLE CHARACTER
-//	     
-//	     ArrayList<SingleCharacter> test_alphabet = new ArrayList<>();
-//	     test_alphabet.add(new SingleCharacter('a', 10));
-//	     test_alphabet.add(new SingleCharacter('b', 14));
-//	     test_alphabet.add(new SingleCharacter('c', 5));
-//	     test_alphabet.add(new SingleCharacter('d', 20));
-//	     test_alphabet.add(new SingleCharacter('l', 24));
-//	     test_alphabet.add(new SingleCharacter('g', 7));
-//	     test_alphabet.add(new SingleCharacter('z', 15));
-//	     test_alphabet.add(new SingleCharacter('y', 16));
-//	     test_alphabet.add(new SingleCharacter('x', 23));
-//	     test_alphabet.add(new SingleCharacter('o', 12));
-//	     test_alphabet.add(new SingleCharacter('p', 19));
-//	     test_alphabet.add(new SingleCharacter('s', 9));
-//	     
-//	     HuffmanTree<SingleCharacter> huff_tree = new HuffmanTree<>(test_alphabet);
-//	     HashMap<SingleCharacter, BinaryBox> codes = huff_tree.getCodeDictionary();
-//	     
-//	     
-//	     ArrayList<String> test_input = new ArrayList<>();
-//	     test_input.add("a");
-//	     test_input.add("b");
-//	     test_input.add("c");
-//	     test_input.add("d");
-//	     test_input.add("e");
-//	     test_input.add("l");
-//	     test_input.add("g");
-//	     test_input.add("z");
-//	     test_input.add("y");
-//	     test_input.add("x");
-//	     test_input.add("o");
-//	     test_input.add("p");
-//	     test_input.add("s");
-//	     
-//	     Translator test_translator = new Translator();
-//	     ArrayList codesList = test_translator.translateSC(codes, test_input);
-//	     
-//	     CodeWriter cw = new CodeWriter();
-//	     
-//	     cw.saveCodeToFile(codesList, codes);
-//	     
-//		 // KONIEC TESTU DLA DLA SINGLE CHARACTER #####################################################
+	     //V2 PRAWDZIWY POCZĄTEK TESTU DLA SINGLE CHARACTER
 	     
-	     // TEST CAŁOŚCIOWY DLA SINGLE CHARACTER ####################################################
+	     ArrayList<SingleCharacter> test_alphabet = new ArrayList<>();
+	     test_alphabet.add(new SingleCharacter('a', 10));
+	     test_alphabet.add(new SingleCharacter('b', 14));
+	     test_alphabet.add(new SingleCharacter('c', 5));
+	     test_alphabet.add(new SingleCharacter('d', 20));
+	     test_alphabet.add(new SingleCharacter('l', 24));
+	     test_alphabet.add(new SingleCharacter('g', 7));
+	     test_alphabet.add(new SingleCharacter('z', 15));
+	     test_alphabet.add(new SingleCharacter('y', 16));
+	     test_alphabet.add(new SingleCharacter('x', 23));
+	     test_alphabet.add(new SingleCharacter('o', 12));
+	     test_alphabet.add(new SingleCharacter('p', 19));
+	     test_alphabet.add(new SingleCharacter('s', 9));
 	     
-	     InputReader ourReader = new InputReader("/home/koda/gen.txt"); 										//czyta plik wejsciowy
-	     ArrayList<SingleCharacter> alphabet_SC = ourReader.readToSingleCharacter(); 							// ładuje plik do struktury SingleCharacter
-	     
-	     alphabet_SC = ourReader.returnStatisticHashMapSC();
-	     
-	     HuffmanTree<SingleCharacter> huff_tree_SC = new HuffmanTree<>(alphabet_SC);							//buduje drzewo
-	     HashMap<SingleCharacter, BinaryBox> dictionary_SC = huff_tree_SC.getCodeDictionary();					//wyjmuje słownik z drzewa
-	     
-	     Translator translator_SC = new Translator();															// nowy obiekt translatora
-	     ArrayList codesList_SC = translator_SC.translateSC(dictionary_SC, ourReader.getListSingleCharacter());	// zamienia symbole z listy wejściowej na listę słów kodowych
-	     
-	     CodeWriter cw_SC = new CodeWriter();																	// nowy obiekt zapisywacza do pliku
-	     
-	     cw_SC.saveCodeToFile(codesList_SC, dictionary_SC);														// zapisuje słowa kodowe do pliku
+	     HuffmanTree<SingleCharacter> huff_tree = new HuffmanTree<>(test_alphabet);
+	     HashMap<SingleCharacter, BinaryBox> codes = huff_tree.getCodeDictionary();
 	     
 	     
-	     // KONIEC TESTU CAŁOŚCIOWEGO DLA SINGLE CHARACTER ##########################################
+	     ArrayList<SingleCharacter> test_input = new ArrayList<>();
+	     test_input.add(new SingleCharacter('a'));
+	     test_input.add(new SingleCharacter('b'));
+	     test_input.add(new SingleCharacter('c'));
+	     test_input.add(new SingleCharacter('d'));
+	     test_input.add(new SingleCharacter('e'));
+	     test_input.add(new SingleCharacter('l'));
+	     test_input.add(new SingleCharacter('g'));
+	     test_input.add(new SingleCharacter('z'));
+	     test_input.add(new SingleCharacter('y'));
+	     test_input.add(new SingleCharacter('x'));
+	     test_input.add(new SingleCharacter('o'));
+	     test_input.add(new SingleCharacter('p'));
+	     test_input.add(new SingleCharacter('s'));
 	     
-//	     // TEST CAŁOŚCIOWY DLA TWO CHARACTERS ####################################################
-//	     
-//	     InputReader ourReader = new InputReader("/home/koda/gen.txt"); 										//czyta plik wejsciowy
-//	     ArrayList<TwoCharacters> alphabet_TC = ourReader.readToTwoCharacters();								// ładuje plik do struktury SingleCharacter
-//	     ourReader.printStatisticHashMap();
-//	     
-//	     alphabet_TC = ourReader.returnStatisticHashMapTC();
-//	     
-//	     HuffmanTree<TwoCharacters> huff_tree_TC = new HuffmanTree<>(alphabet_TC);								//buduje drzewo
-//	     HashMap<TwoCharacters, BinaryBox> dictionary_TC = huff_tree_TC.getCodeDictionary();					//wyjmuje słownik z drzewa
-//	     
-//	     Translator translator_TC = new Translator();															// nowy obiekt translatora
-//	     ArrayList codesList_TC = translator_TC.translateTC(dictionary_TC, ourReader.getlistTwoCharacters());	// zamienia symbole z listy wejściowej na listę słów kodowych
-//	     
-//	     CodeWriter cw_TC = new CodeWriter();																	// nowy obiekt zapisywacza do pliku
-//	     
-//	     cw_TC.saveCodeToFile(codesList_TC, dictionary_TC);														// zapisuje słowa kodowe do pliku
-//	     
-//	     
-//	     // KONIEC TESTU CAŁOŚCIOWEGO DLA TWO CHARACTERS ##########################################
+	     Translator test_translator = new Translator();
+	     ArrayList codesList = test_translator.translateSC(codes, test_input);
 	     
-//	     // TEST CAŁOŚCIOWY DLA CONTEXT CHARACTER ####################################################
-//	     
-//	     InputReader ourReader = new InputReader("/home/koda/gen.txt"); 										//czyta plik wejsciowy
-//	     ArrayList<ContextCharacter> alphabet_CC = ourReader.readToContextCharacter();							// ładuje plik do struktury SingleCharacter
-////	     ourReader.printStatisticHashMap();
-//	     
-//	     
-//	     alphabet_CC = ourReader.returnStatisticHashMapCC();	   
-//	     
-//	     HuffmanTree<ContextCharacter> huff_tree_CC = new HuffmanTree<>(alphabet_CC);							//buduje drzewo
-//	     HashMap<ContextCharacter, BinaryBox> dictionary_CC = huff_tree_CC.getCodeDictionary();					//wyjmuje słownik z drzewa
-//	     	     
-//	     DictionaryPrinter.printCCDictionary(dictionary_CC);
-//	     
-//	     Translator translator_CC = new Translator();															// nowy obiekt translatora
-//	     ArrayList codesList_CC = translator_CC.translateCC(dictionary_CC, ourReader.getlistContextCharacter());	// zamienia symbole z listy wejściowej na listę słów kodowych
-//	     
-//	     CodeWriter cw_TC = new CodeWriter();																	// nowy obiekt zapisywacza do pliku
-//	     
-//	     cw_TC.saveCodeToFile(codesList_CC, dictionary_CC);														// zapisuje słowa kodowe do pliku
-//	     
-//	     
-//	     // KONIEC TESTU CAŁOŚCIOWEGO DLA CONTEXT CHARACTER ##########################################
+	     CodeWriter cw = new CodeWriter();
 	     
-	     // TEST WCZYTYWANIA OBRAZÓW
+	     cw.saveCodeToFile(codesList, codes);
 	     
-//	     BufferedImage bufferedImage = ImageIO.read(new File("/home/koda/lenaOriginal.png"));
-//	     
-//	     list<byte> imageBytList;
-//	     
-//	     byte[] pixels = ((DataBufferByte) bufferedImage.getRaster().getDataBuffer()).getData();
-	     
-	     // KONIEC TESTU WCZYTYWANIA OBRAZÓW
+		 // KONIEC TESTU DLA DLA SINGLE CHARACTER #####################################################
 	     
 	     
 	     // TEST DLA TWO CHARACTERS #####################################################
@@ -275,6 +204,89 @@ public class App {
 //	     cw.saveCodeToFile(codesList_cc, codes_cc);
 	     
 //	     //KONIEC TESTU DLA CONTEXTCHARACTER #############################################
+	     
+//	     // TEST CAŁOŚCIOWY DLA SINGLE CHARACTER ####################################################
+//	     
+//	     InputReader ourReader = new InputReader("/home/koda/gen.txt"); 										//czyta plik wejsciowy
+//	     ArrayList<SingleCharacter> alphabet_SC = ourReader.readToSingleCharacter(); 							// ładuje plik do struktury SingleCharacter
+//	     
+//	     alphabet_SC = ourReader.returnStatisticHashMapSC();
+//	     
+//	     HuffmanTree<SingleCharacter> huff_tree_SC = new HuffmanTree<>(alphabet_SC);							//buduje drzewo
+//	     HashMap<SingleCharacter, BinaryBox> dictionary_SC = huff_tree_SC.getCodeDictionary();					//wyjmuje słownik z drzewa
+//	     
+//	     Translator translator_SC = new Translator();															// nowy obiekt translatora
+//	     ArrayList codesList_SC = translator_SC.translateSC(dictionary_SC, ourReader.getListSingleCharacter());	// zamienia symbole z listy wejściowej na listę słów kodowych
+//	     
+//	     CodeWriter cw_SC = new CodeWriter();																	// nowy obiekt zapisywacza do pliku
+//	     
+//	     cw_SC.saveCodeToFile(codesList_SC, dictionary_SC);														// zapisuje słowa kodowe do pliku
+//	     
+//	     
+//	     // KONIEC TESTU CAŁOŚCIOWEGO DLA SINGLE CHARACTER ##########################################
+	     
+//	     // TEST CAŁOŚCIOWY DLA TWO CHARACTERS ####################################################
+//	     
+//	     InputReader ourReader = new InputReader("/home/koda/gen.txt"); 										//czyta plik wejsciowy
+//	     ArrayList<TwoCharacters> alphabet_TC = ourReader.readToTwoCharacters();								// ładuje plik do struktury SingleCharacter
+//	     ourReader.printStatisticHashMap();
+//	     
+//	     alphabet_TC = ourReader.returnStatisticHashMapTC();
+//	     
+//	     HuffmanTree<TwoCharacters> huff_tree_TC = new HuffmanTree<>(alphabet_TC);								//buduje drzewo
+//	     HashMap<TwoCharacters, BinaryBox> dictionary_TC = huff_tree_TC.getCodeDictionary();					//wyjmuje słownik z drzewa
+//	     
+//	     Translator translator_TC = new Translator();															// nowy obiekt translatora
+//	     ArrayList codesList_TC = translator_TC.translateTC(dictionary_TC, ourReader.getlistTwoCharacters());	// zamienia symbole z listy wejściowej na listę słów kodowych
+//	     
+//	     CodeWriter cw_TC = new CodeWriter();																	// nowy obiekt zapisywacza do pliku
+//	     
+//	     cw_TC.saveCodeToFile(codesList_TC, dictionary_TC);														// zapisuje słowa kodowe do pliku
+//	     
+//	     
+//	     // KONIEC TESTU CAŁOŚCIOWEGO DLA TWO CHARACTERS ##########################################
+	     
+//	     // TEST CAŁOŚCIOWY DLA CONTEXT CHARACTER ####################################################
+//	     
+//	     InputReader ourReader = new InputReader("/home/koda/gen.txt"); 										//czyta plik wejsciowy
+//	     ArrayList<ContextCharacter> alphabet_CC = ourReader.readToContextCharacter();							// ładuje plik do struktury SingleCharacter
+////	     ourReader.printStatisticHashMap();
+//	     
+//	     
+//	     alphabet_CC = ourReader.returnStatisticHashMapCC();	   
+//	     
+//	     HuffmanTree<ContextCharacter> huff_tree_CC = new HuffmanTree<>(alphabet_CC);							//buduje drzewo
+//	     HashMap<ContextCharacter, BinaryBox> dictionary_CC = huff_tree_CC.getCodeDictionary();					//wyjmuje słownik z drzewa
+//	     	     
+//	     DictionaryPrinter.printCCDictionary(dictionary_CC);
+//	     
+//	     Translator translator_CC = new Translator();															// nowy obiekt translatora
+//	     ArrayList codesList_CC = translator_CC.translateCC(dictionary_CC, ourReader.getlistContextCharacter());	// zamienia symbole z listy wejściowej na listę słów kodowych
+//	     
+//	     CodeWriter cw_TC = new CodeWriter();																	// nowy obiekt zapisywacza do pliku
+//	     
+//	     cw_TC.saveCodeToFile(codesList_CC, dictionary_CC);														// zapisuje słowa kodowe do pliku
+//	     
+//	     
+//	     // KONIEC TESTU CAŁOŚCIOWEGO DLA CONTEXT CHARACTER ##########################################
+	     
+//	     // TEST WCZYTYWANIA OBRAZÓW
+//	     
+//	     ByteArrayOutputStream baos=new ByteArrayOutputStream(10000);
+//	     BufferedImage img = ImageIO.read(new File("/home/koda/lenaOriginal.png"));
+//	     ImageIO.write(img, "png", baos);
+//	     baos.flush();
+//	     
+//	     String base64String=Base64.encode(baos.toByteArray());
+//	     baos.close();
+//	     
+//	     byte[] bytearray = Base64.decode(base64String);
+//	     System.out.println(bytearray.length);
+//	     
+//	     BufferedImage imag=ImageIO.read(new ByteArrayInputStream(bytearray));
+//	     ImageIO.write(imag, "png", new File("/home/koda/","lenaProcessed.png"));
+//	     
+//	     // KONIEC TESTU WCZYTYWANIA OBRAZÓW
 	}
 
 }
