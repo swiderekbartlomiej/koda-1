@@ -94,49 +94,49 @@ public class App {
 //	    	System.out.println("Char: " + entry.getKey().getFirst() + entry.getKey().getSecond() + " Code:" + entry.getValue().getValue() + " Space:" + entry.getValue().returnFreeSpace());
 //		}
 	     
-	     //V2 PRAWDZIWY POCZĄTEK TESTU DLA SINGLE CHARACTER
-	     
-	     ArrayList<SingleCharacter> test_alphabet = new ArrayList<>();
-	     test_alphabet.add(new SingleCharacter('a', 10));
-	     test_alphabet.add(new SingleCharacter('b', 14));
-	     test_alphabet.add(new SingleCharacter('c', 5));
-	     test_alphabet.add(new SingleCharacter('d', 20));
-	     test_alphabet.add(new SingleCharacter('l', 24));
-	     test_alphabet.add(new SingleCharacter('g', 7));
-	     test_alphabet.add(new SingleCharacter('z', 15));
-	     test_alphabet.add(new SingleCharacter('y', 16));
-	     test_alphabet.add(new SingleCharacter('x', 23));
-	     test_alphabet.add(new SingleCharacter('o', 12));
-	     test_alphabet.add(new SingleCharacter('p', 19));
-	     test_alphabet.add(new SingleCharacter('s', 9));
-	     
-	     HuffmanTree<SingleCharacter> huff_tree = new HuffmanTree<>(test_alphabet);
-	     HashMap<SingleCharacter, BinaryBox> codes = huff_tree.getCodeDictionary();
-	     
-	     
-	     ArrayList<SingleCharacter> test_input = new ArrayList<>();
-	     test_input.add(new SingleCharacter('a'));
-	     test_input.add(new SingleCharacter('b'));
-	     test_input.add(new SingleCharacter('c'));
-	     test_input.add(new SingleCharacter('d'));
-	     test_input.add(new SingleCharacter('e'));
-	     test_input.add(new SingleCharacter('l'));
-	     test_input.add(new SingleCharacter('g'));
-	     test_input.add(new SingleCharacter('z'));
-	     test_input.add(new SingleCharacter('y'));
-	     test_input.add(new SingleCharacter('x'));
-	     test_input.add(new SingleCharacter('o'));
-	     test_input.add(new SingleCharacter('p'));
-	     test_input.add(new SingleCharacter('s'));
-	     
-	     Translator test_translator = new Translator();
-	     ArrayList codesList = test_translator.translateSC(codes, test_input);
-	     
-	     CodeWriter cw = new CodeWriter();
-	     
-	     cw.saveCodeToFile(codesList, codes);
-	     
-		 // KONIEC TESTU DLA DLA SINGLE CHARACTER #####################################################
+//	     //V2 PRAWDZIWY POCZĄTEK TESTU DLA SINGLE CHARACTER
+//	     
+//	     ArrayList<SingleCharacter> test_alphabet = new ArrayList<>();
+//	     test_alphabet.add(new SingleCharacter('a', 10));
+//	     test_alphabet.add(new SingleCharacter('b', 14));
+//	     test_alphabet.add(new SingleCharacter('c', 5));
+//	     test_alphabet.add(new SingleCharacter('d', 20));
+//	     test_alphabet.add(new SingleCharacter('l', 24));
+//	     test_alphabet.add(new SingleCharacter('g', 7));
+//	     test_alphabet.add(new SingleCharacter('z', 15));
+//	     test_alphabet.add(new SingleCharacter('y', 16));
+//	     test_alphabet.add(new SingleCharacter('x', 23));
+//	     test_alphabet.add(new SingleCharacter('o', 12));
+//	     test_alphabet.add(new SingleCharacter('p', 19));
+//	     test_alphabet.add(new SingleCharacter('s', 9));
+//	     
+//	     HuffmanTree<SingleCharacter> huff_tree = new HuffmanTree<>(test_alphabet);
+//	     HashMap<SingleCharacter, BinaryBox> codes = huff_tree.getCodeDictionary();
+//	     
+//	     
+//	     ArrayList<SingleCharacter> test_input = new ArrayList<>();
+//	     test_input.add(new SingleCharacter('a'));
+//	     test_input.add(new SingleCharacter('b'));
+//	     test_input.add(new SingleCharacter('c'));
+//	     test_input.add(new SingleCharacter('d'));
+//	     test_input.add(new SingleCharacter('e'));
+//	     test_input.add(new SingleCharacter('l'));
+//	     test_input.add(new SingleCharacter('g'));
+//	     test_input.add(new SingleCharacter('z'));
+//	     test_input.add(new SingleCharacter('y'));
+//	     test_input.add(new SingleCharacter('x'));
+//	     test_input.add(new SingleCharacter('o'));
+//	     test_input.add(new SingleCharacter('p'));
+//	     test_input.add(new SingleCharacter('s'));
+//	     
+//	     Translator test_translator = new Translator();
+//	     ArrayList codesList = test_translator.translateSC(codes, test_input);
+//	     
+//	     CodeWriter cw = new CodeWriter();
+//	     
+//	     cw.saveCodeToFile(codesList, codes);
+//	     
+//		 // KONIEC TESTU DLA DLA SINGLE CHARACTER #####################################################
 	     
 	     
 	     // TEST DLA TWO CHARACTERS #####################################################
@@ -168,42 +168,44 @@ public class App {
 //	     cw.saveCodeToFile(codesList_tc, codes_tc);
 	     
 //	     KONIEC TESTU DLA TWO CHARACTERS #################################################
-//	     
-//	    // TEST DLA CONTEXTCHARACTER #######################################################
-//	     
-//	     ArrayList<ContextCharacter> test_alphabet_cc = new ArrayList<>();
-//	     
-//	     test_alphabet_cc.add(new ContextCharacter('d','^', 12));
-//	     test_alphabet_cc.add(new ContextCharacter('o','d', 3));
-//	     test_alphabet_cc.add(new ContextCharacter('o','o', 8));
-//	     test_alphabet_cc.add(new ContextCharacter('p','o', 11));
-//	     test_alphabet_cc.add(new ContextCharacter('a','p', 6));
-//	     test_alphabet_cc.add(new ContextCharacter('l','a', 22));
-//	     test_alphabet_cc.add(new ContextCharacter('b','l', 1));
-//	     test_alphabet_cc.add(new ContextCharacter('i','b', 9));
-//	     test_alphabet_cc.add(new ContextCharacter('s','i', 7));
-//	     test_alphabet_cc.add(new ContextCharacter('k','s', 13)); // to ten 10ty element - od niego już się wywala
-//	     //test_alphabet_cc.add(new ContextCharacter('a','k', 3));
-//	     
-//	     HuffmanTree<ContextCharacter> huff_tree_cc = new HuffmanTree<>(test_alphabet_cc);
-//	     HashMap<ContextCharacter, BinaryBox> codes_cc = huff_tree_cc.getCodeDictionary();
-//	     
-//	     ArrayList<String> test_input_cc = new ArrayList<>();
-//	     test_input_cc.add("^d");
-//	     test_input_cc.add("do");
-//	     test_input_cc.add("oo");
-//	     test_input_cc.add("op");
-//	     test_input_cc.add("pa");
-//	     test_input_cc.add("al");
-//	     
-//	     Translator test_translator = new Translator();
-//	     ArrayList codesList_cc = test_translator.translateCC(codes_cc, test_input_cc);
-//	     
-//	     CodeWriter cw = new CodeWriter();
-//	     
-//	     cw.saveCodeToFile(codesList_cc, codes_cc);
+     
+	    // TEST DLA CONTEXTCHARACTER #######################################################
 	     
-//	     //KONIEC TESTU DLA CONTEXTCHARACTER #############################################
+	     ArrayList<ContextCharacter> test_alphabet_cc = new ArrayList<>();
+	     
+	     test_alphabet_cc.add(new ContextCharacter('d','^', 12));
+	     test_alphabet_cc.add(new ContextCharacter('o','d', 3));
+	     test_alphabet_cc.add(new ContextCharacter('o','o', 8));
+	     test_alphabet_cc.add(new ContextCharacter('p','o', 11));
+	     test_alphabet_cc.add(new ContextCharacter('a','p', 6));
+	     test_alphabet_cc.add(new ContextCharacter('l','a', 22));
+	     test_alphabet_cc.add(new ContextCharacter('b','l', 1));
+	     test_alphabet_cc.add(new ContextCharacter('i','b', 9));
+	     test_alphabet_cc.add(new ContextCharacter('s','i', 7));
+	     test_alphabet_cc.add(new ContextCharacter('k','s', 13)); // to ten 10ty element - od niego już się wywala
+	     //test_alphabet_cc.add(new ContextCharacter('a','k', 3));
+	     
+	     HuffmanTree<ContextCharacter> huff_tree_cc = new HuffmanTree<>(test_alphabet_cc);
+	     HashMap<ContextCharacter, BinaryBox> codes_cc = huff_tree_cc.getCodeDictionary();
+	     
+	     //DictionaryPrinter.printCCDictionary(codes_cc);
+	     
+	     ArrayList<ContextCharacter> test_input_cc = new ArrayList<>();
+	     test_input_cc.add(new ContextCharacter('d','^'));
+	     test_input_cc.add(new ContextCharacter('o','d'));
+	     test_input_cc.add(new ContextCharacter('o','o'));
+	     test_input_cc.add(new ContextCharacter('p','o'));
+	     test_input_cc.add(new ContextCharacter('a','p'));
+	     test_input_cc.add(new ContextCharacter('l','a'));
+	     
+	     Translator test_translator = new Translator();
+	     ArrayList codesList_cc = test_translator.translateCC(codes_cc, test_input_cc);
+	     
+	     CodeWriter cw = new CodeWriter();
+	     
+	     cw.saveCodeToFile(codesList_cc, codes_cc);
+	     
+	     //KONIEC TESTU DLA CONTEXTCHARACTER #############################################
 	     
 //	     // TEST CAŁOŚCIOWY DLA SINGLE CHARACTER ####################################################
 //	     
@@ -261,7 +263,7 @@ public class App {
 //	     DictionaryPrinter.printCCDictionary(dictionary_CC);
 //	     
 //	     Translator translator_CC = new Translator();															// nowy obiekt translatora
-//	     ArrayList codesList_CC = translator_CC.translateCC(dictionary_CC, ourReader.getlistContextCharacter());	// zamienia symbole z listy wejściowej na listę słów kodowych
+//	     ArrayList codesList_CC = translator_CC.translateCC(dictionary_CC, ourReader.getlistContextCharacter());// zamienia symbole z listy wejściowej na listę słów kodowych
 //	     
 //	     CodeWriter cw_TC = new CodeWriter();																	// nowy obiekt zapisywacza do pliku
 //	     
