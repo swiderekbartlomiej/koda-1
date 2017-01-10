@@ -71,6 +71,10 @@ public class CodeWriter<NodeType extends HuffmanTreeNode> {
 		
 		try {
 			PrintWriter dictionaryOut = new PrintWriter("/home/koda/gen-bin2-dic");
+			for (Map.Entry<NodeType, BinaryBox> entry : dictionary.entrySet()){
+				dictionaryOut.write("["+entry.getKey().getClass().toString().split("\\.")[entry.getKey().getClass().toString().split("\\.").length-1]+"]");
+				break;
+			}
 			dictionaryOut.write("[zeros="+actualBox.returnFreeSpace()+"]");
 			for (Map.Entry<NodeType, BinaryBox> entry : dictionary.entrySet()){
 				dictionaryOut.write("{");

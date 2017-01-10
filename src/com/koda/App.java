@@ -139,8 +139,8 @@ public class App {
 //		 // KONIEC TESTU DLA DLA SINGLE CHARACTER #####################################################
 	     
 	     
-	     // TEST DLA TWO CHARACTERS #####################################################
-	     
+//	     // TEST DLA TWO CHARACTERS #####################################################
+//	     
 //	     ArrayList<TwoCharacters> test_alphabet_tc = new ArrayList<>();
 //	     test_alphabet_tc.add(new TwoCharacters('d','u', 12));
 //	     test_alphabet_tc.add(new TwoCharacters('p','a', 3));
@@ -152,13 +152,13 @@ public class App {
 //	     HuffmanTree<TwoCharacters> huff_tree_tc = new HuffmanTree<>(test_alphabet_tc);
 //	     HashMap<TwoCharacters, BinaryBox> codes_tc = huff_tree_tc.getCodeDictionary();
 //	     
-//	     ArrayList<String> test_input_tc = new ArrayList<>();
-//	     test_input_tc.add("du");
-//	     test_input_tc.add("pa");
-//	     test_input_tc.add("bi");
-//	     test_input_tc.add("sk");
-//	     test_input_tc.add("up");
-//	     test_input_tc.add("a$");
+//	     ArrayList<TwoCharacters> test_input_tc = new ArrayList<>();
+//	     test_input_tc.add(new TwoCharacters('d','u'));
+//	     test_input_tc.add(new TwoCharacters('p','a'));
+//	     test_input_tc.add(new TwoCharacters('b','i'));
+//	     test_input_tc.add(new TwoCharacters('s','k'));
+//	     test_input_tc.add(new TwoCharacters('u','p'));
+//	     test_input_tc.add(new TwoCharacters('a','$'));
 //	     
 //	     Translator test_translator = new Translator();
 //	     ArrayList codesList_tc = test_translator.translateTC(codes_tc, test_input_tc);
@@ -166,8 +166,8 @@ public class App {
 //	     CodeWriter cw = new CodeWriter();
 //	     
 //	     cw.saveCodeToFile(codesList_tc, codes_tc);
-	     
-//	     KONIEC TESTU DLA TWO CHARACTERS #################################################
+//	     
+//	    // KONIEC TESTU DLA TWO CHARACTERS #################################################
      
 	    // TEST DLA CONTEXTCHARACTER #######################################################
 	     
