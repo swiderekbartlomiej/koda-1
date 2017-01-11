@@ -66,9 +66,9 @@ public class Translator {
 		for (ContextCharacter inputCC : inputList){
 			inputWord = inputCC.getValue();
 			for (Map.Entry<ContextCharacter, BinaryBox> entry : disctionaryHashMap.entrySet()){
-				if (inputWord.charAt(0)==entry.getKey().getCharacters()[1] &&  inputWord.charAt(1)==entry.getKey().getCharacters()[0]){
+				if (inputWord.charAt(1)==entry.getKey().getCharacters()[1] &&  inputWord.charAt(0)==entry.getKey().getCharacters()[0]){
 					codedInputList.add(leftPad(Integer.toString(entry.getValue().getValue(),2),32-entry.getValue().returnFreeSpace()-Integer.toString(entry.getValue().getValue(),2).length(),"0"));
-//					System.out.println("Symbol: "+inputWord+" kod:"+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2)+" rozmiar:"+(32-entry.getValue().returnFreeSpace()));
+					System.out.println("Symbol: "+inputWord+" kod:"+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2)+" rozmiar:"+(32-entry.getValue().returnFreeSpace()));
 					codeWordSumSize+=(32-entry.getValue().returnFreeSpace());
 				}
 			}
