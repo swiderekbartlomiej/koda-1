@@ -26,7 +26,7 @@ public class CodeWriter<NodeType extends HuffmanTreeNode> {
 	 * Przyjmuje od tłumacza ArrayListe syboli w zakodowanej postaci, i zapisuje je nieredundantnie do pliku.
 	 * @param listOfCodeWords lista zakodowanych symboli, podawana przez tłumacza
 	 */
-	public void saveCodeToFile(ArrayList listOfCodeWords, HashMap<NodeType, BinaryBox> dictionary){
+	public void saveCodeToFile(ArrayList listOfCodeWords, HashMap<NodeType, BinaryBox> dictionary, String fileType){
 		
 		BinaryBox actualBox = new BinaryBox();
 		String partA; //int
@@ -75,6 +75,7 @@ public class CodeWriter<NodeType extends HuffmanTreeNode> {
 				dictionaryOut.write("["+entry.getKey().getClass().toString().split("\\.")[entry.getKey().getClass().toString().split("\\.").length-1]+"]");
 				break;
 			}
+			dictionaryOut.write("[type="+fileType+"]");
 			dictionaryOut.write("[zeros="+actualBox.returnFreeSpace()+"]");
 			for (Map.Entry<NodeType, BinaryBox> entry : dictionary.entrySet()){
 				dictionaryOut.write("{");

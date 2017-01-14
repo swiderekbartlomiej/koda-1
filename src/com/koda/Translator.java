@@ -23,6 +23,7 @@ public class Translator {
 					System.out.println("Symbol: "+inputWord+" kod:"+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2)+" rozmiar:"+(32-entry.getValue().returnFreeSpace()));
 					codedInputList.add(leftPad(Integer.toString(entry.getValue().getValue(),2),32-entry.getValue().returnFreeSpace()-Integer.toString(entry.getValue().getValue(),2).length(),"0"));
 					codeWordSumSize+=(32-entry.getValue().returnFreeSpace());
+					break;
 				}
 			}
 		}
@@ -39,14 +40,18 @@ public class Translator {
 	public static ArrayList translateTC(HashMap<TwoCharacters, BinaryBox> disctionaryHashMap, ArrayList<TwoCharacters> inputList){
 		ArrayList<String> codedInputList = new ArrayList();
 		String inputWord;
+		//int i=0;
 		int codeWordSumSize = new Integer(0);
 		for (TwoCharacters inputTC : inputList){
+			//i++;
+			//System.out.println(i*100/inputList.size()+"% "+i+"/"+inputList.size());
 			inputWord = inputTC.getValue();
 			for (Map.Entry<TwoCharacters, BinaryBox> entry : disctionaryHashMap.entrySet()){
 				if (inputWord.charAt(0)==entry.getKey().getCharacters()[0] &&  inputWord.charAt(1)==entry.getKey().getCharacters()[1]){
 					codedInputList.add(leftPad(Integer.toString(entry.getValue().getValue(),2),32-entry.getValue().returnFreeSpace()-Integer.toString(entry.getValue().getValue(),2).length(),"0"));
 //					System.out.println("Symbol: "+inputWord+" kod:"+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2)+" rozmiar:"+(32-entry.getValue().returnFreeSpace()));
 					codeWordSumSize+=(32-entry.getValue().returnFreeSpace());
+					break;
 				}
 			}
 		}
@@ -70,6 +75,7 @@ public class Translator {
 					codedInputList.add(leftPad(Integer.toString(entry.getValue().getValue(),2),32-entry.getValue().returnFreeSpace()-Integer.toString(entry.getValue().getValue(),2).length(),"0"));
 					System.out.println("Symbol: "+inputWord+" kod:"+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2)+" rozmiar:"+(32-entry.getValue().returnFreeSpace()));
 					codeWordSumSize+=(32-entry.getValue().returnFreeSpace());
+					break;
 				}
 			}
 		}
