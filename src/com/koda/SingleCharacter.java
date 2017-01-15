@@ -31,11 +31,6 @@ public class SingleCharacter extends HuffmanTreeNode
 		return m_Symbol;
 	}
 	
-	private boolean equals(SingleCharacter other)
-	{
-		return this.m_Symbol == other.m_Symbol;
-	}
-	
 	@Override
 	public boolean equals(Object other)
 	{
@@ -46,11 +41,15 @@ public class SingleCharacter extends HuffmanTreeNode
 		return false;
 	}
 	
+	private boolean equals(SingleCharacter other)
+	{
+		return this.getValue().hashCode() == other.getValue().hashCode();
+	}
+	
 	@Override
 	public int hashCode()
 	{
-		m_HashSeed = 31 * m_HashSeed + (int)m_Symbol;
-		return m_HashSeed;
+		return this.getValue().hashCode();
 	}
 	
 	// Drukuje jakie wartosci symboli są w SingleCharacter i wagę węzła

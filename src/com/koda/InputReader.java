@@ -90,7 +90,6 @@ public class InputReader {
 					nextChar+=" ";
 				}
 				inputList.add(nextChar);
-				//System.out.println(nextChar);
 				if (!statisticMap.containsKey(nextChar)){
 					statisticMap.put(nextChar, 1);
 				}
@@ -126,7 +125,6 @@ public class InputReader {
 				actualChar = scanner.next();
 				String nextChar = contextChar+actualChar;
 				inputList.add(nextChar);
-				//System.out.println(nextChar);
 				if (!statisticMap.containsKey(nextChar)){
 					statisticMap.put(nextChar, 1);
 				}
@@ -201,7 +199,6 @@ public class InputReader {
 		ArrayList<ContextCharacter> arrayListStatisticMap = new ArrayList();
 		for (Map.Entry<String, Integer> entry : statisticMap.entrySet()){
 			arrayListStatisticMap.add(new ContextCharacter(entry.getKey().toCharArray()[1],entry.getKey().toCharArray()[0], entry.getValue()));
-//			System.out.println(entry.getKey().toCharArray()[1]+"  "+entry.getKey().toCharArray()[0]+"  "+entry.getValue());
 		}
 		return arrayListStatisticMap;
 	}
@@ -225,12 +222,11 @@ public class InputReader {
 		baos.flush();
 		String base64String=Base64.encode(baos.toByteArray());
 		baos.close();
-		byte[] bytearray = Base64.decode(base64String); // TABLICA BAJTÓW OBRAZU
+		byte[] bytearray = Base64.decode(base64String);
 		PrintWriter imageTextOut = new PrintWriter(this.path);
 		for (int i=0;i<bytearray.length; i++){
 			char byteAsChar = (char)(bytearray[i] & 0xFF);
 			imageTextOut.write(byteAsChar);
-			//System.out.println("Original byte: "+bytearray[i]+", as char:"+byteAsChar+", as byte"+(byte)byteAsChar);
 		}
 		imageTextOut.close();
 	}

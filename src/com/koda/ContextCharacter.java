@@ -37,33 +37,19 @@ public class ContextCharacter extends TwoCharacters
 		return m_Characters[1];
 	}
 
-	
 	@Override
 	public boolean equals(Object other)
 	{
-		if((other instanceof ContextCharacter))
+		if(other instanceof ContextCharacter)
 		{
-			if
-			(
-				(((ContextCharacter) other).getSymbol() == this.getSymbol()) &&
-				(((ContextCharacter) other).getSymbolContext() == this.getSymbol())
-			)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return this.equals((ContextCharacter)other);
 		}
 		return false;
 	}
 	
-	@Override
-	public int hashCode()
+	private boolean equals(ContextCharacter other)
 	{
-		int prime = 57;
-		return prime + (m_Characters[0] != null ? m_Characters[0].hashCode() : 0) + (m_Characters[1] != null ? m_Characters[1].hashCode() : 0);
+		return (this.getFirst().hashCode() == other.getFirst().hashCode() && this.getSecond().hashCode() == other.getSecond().hashCode());
 	}
 	
 	@Override
