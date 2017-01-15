@@ -151,7 +151,7 @@ public class App {
 	     
 //	     // TEST CAŁOŚCIOWY DLA SINGLE CHARACTER ######################################################
 //	     
-//	     InputReader ourReader = new InputReader("/home/koda/lenaOriginal.png"); 										//czyta plik wejsciowy
+//	     InputReader ourReader = new InputReader("/home/koda/gen.txt"); 										//czyta plik wejsciowy
 //	     ArrayList<SingleCharacter> alphabet_SC = ourReader.readToSingleCharacter(); 							// ładuje plik do struktury SingleCharacter
 //	     
 //	     alphabet_SC = ourReader.returnStatisticHashMapSC();
@@ -164,7 +164,7 @@ public class App {
 //	     
 //	     CodeWriter cw_SC = new CodeWriter();																	// nowy obiekt zapisywacza do pliku
 //	     
-//	     cw_SC.saveCodeToFile(codesList_SC, dictionary_SC,"image");														// zapisuje słowa kodowe do pliku
+//	     cw_SC.saveCodeToFile(codesList_SC, dictionary_SC,"text");														// zapisuje słowa kodowe do pliku
 //	     
 //	     
 //	     // KONIEC TESTU CAŁOŚCIOWEGO DLA SINGLE CHARACTER ############################################
@@ -217,35 +217,7 @@ public class App {
 //	     
 //	     // KONIEC TESTU CAŁOŚCIOWEGO DLA CONTEXT CHARACTER ###########################################
 	     
-//	     // TEST WCZYTYWANIA OBRAZÓW
-//	     
-//	     ByteArrayOutputStream baos=new ByteArrayOutputStream(10000);
-//	     BufferedImage img = ImageIO.read(new File("/home/koda/lenaOriginal.png"));
-//	     ImageIO.write(img, "png", baos);
-//	     baos.flush();
-//	     
-//	     String base64String=Base64.encode(baos.toByteArray());
-//	     baos.close();
-//	     
-//	     byte[] bytearray = Base64.decode(base64String); //FINALNA TABLICA BAJTÓW
-//	     
-//	     for (int i=0; i<bytearray.length;i++){
-//	    	 char myChar = (char)(bytearray[i] & 0xFF);
-//	    	 byte outByte = (byte)myChar;
-//	    	 bytearray[i]=outByte;
-//	     }
-//	     
-//	     
-//	     BufferedImage imag=ImageIO.read(new ByteArrayInputStream(bytearray));
-//	     ImageIO.write(imag, "png", new File("/home/koda/","lenaProcessed.png"));
-//	     
-//	     
-//	     // ==========================================
 
-//	     InputReader ourReader = new InputReader("/home/koda/lenaOriginal.png");
-//	     ArrayList<SingleCharacter> alphabet_SC = ourReader.readToSingleCharacter();
-//	     
-//	      //KONIEC TESTU WCZYTYWANIA OBRAZÓW
 	}
 
 }
