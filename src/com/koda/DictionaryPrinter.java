@@ -19,6 +19,12 @@ public class DictionaryPrinter {
 		}
 	}
 	
+	public static void printTCDictionary (HashMap<TwoCharacters, BinaryBox> disctionaryHashMap){
+		for (Map.Entry<TwoCharacters, BinaryBox> entry : disctionaryHashMap.entrySet()){
+			System.out.println("Klucz: "+entry.getKey().getValue()+" wartość: "+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2)+" hasz: "+entry.getKey().getValue().hashCode());
+		}
+	}
+	
 	public static void printCCDictionary (HashMap<ContextCharacter, BinaryBox> disctionaryHashMap){
 		for (Map.Entry<ContextCharacter, BinaryBox> entry : disctionaryHashMap.entrySet()){
 			System.out.println("Klucz: "+entry.getKey().getSymbol().toString()+", context :"+entry.getKey().getSymbolContext()+" wartość: "+entry.getValue().getValue()+" binarnie: "+Integer.toString(entry.getValue().getValue(),2));

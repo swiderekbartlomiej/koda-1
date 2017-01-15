@@ -31,13 +31,13 @@ public class SingleCharacter extends HuffmanTreeNode
 		return m_Symbol;
 	}
 	
-	private boolean equals(SingleCharacter other)
+	private boolean equals_Kuby(SingleCharacter other)
 	{
 		return this.m_Symbol == other.m_Symbol;
 	}
 	
-	@Override
-	public boolean equals(Object other)
+	//@Override
+	public boolean equals_Kuby(Object other)
 	{
 		if(other instanceof SingleCharacter)
 		{
@@ -46,11 +46,32 @@ public class SingleCharacter extends HuffmanTreeNode
 		return false;
 	}
 	
+	//MARNA PRÓBA RAFAŁA
+	@Override
+	public boolean equals(Object other)
+	{
+		//System.out.println("Wolam Zewnetrzny equals");
+		if(other instanceof SingleCharacter)
+		{
+			return this.equals((SingleCharacter)other);
+		}
+		return false;
+	}
+	
+	//DALSZA CZESC MARNEJ PROBY
+	private boolean equals(SingleCharacter other)
+	{
+		//System.out.println("Wolam wewnetrzny equals");
+		return this.getValue().hashCode() == other.getValue().hashCode();
+	}
+	
 	@Override
 	public int hashCode()
 	{
-		m_HashSeed = 31 * m_HashSeed + (int)m_Symbol;
-		return m_HashSeed;
+		//System.out.println("Wołam hashCode w SingleCharacter: "+this.getValue().hashCode()+" / "+this.getValue());
+		return this.getValue().hashCode();
+		//m_HashSeed = 31 * m_HashSeed + (int)m_Symbol;
+		//return m_HashSeed;
 	}
 	
 	// Drukuje jakie wartosci symboli są w SingleCharacter i wagę węzła

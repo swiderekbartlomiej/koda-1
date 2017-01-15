@@ -38,8 +38,8 @@ public class ContextCharacter extends TwoCharacters
 	}
 
 	
-	@Override
-	public boolean equals(Object other)
+	//@Override
+	public boolean equals_Kuby(Object other)
 	{
 		if((other instanceof ContextCharacter))
 		{
@@ -59,12 +59,31 @@ public class ContextCharacter extends TwoCharacters
 		return false;
 	}
 	
-	@Override
-	public int hashCode()
-	{
-		int prime = 57;
-		return prime + (m_Characters[0] != null ? m_Characters[0].hashCode() : 0) + (m_Characters[1] != null ? m_Characters[1].hashCode() : 0);
-	}
+	//MARNA PRÓBA RAFAŁA
+		@Override
+		public boolean equals(Object other)
+		{
+			//System.out.println("Wolam Zewnetrzny equals");
+			if(other instanceof ContextCharacter)
+			{
+				return this.equals((ContextCharacter)other);
+			}
+			return false;
+		}
+		
+		//DALSZA CZESC MARNEJ PROBY
+		private boolean equals(ContextCharacter other)
+		{
+			//System.out.println("Wolam wewnetrzny equals");
+			return (this.getFirst().hashCode() == other.getFirst().hashCode() && this.getSecond().hashCode() == other.getSecond().hashCode());
+		}
+	
+//	@Override
+//	public int hashCode()
+//	{
+//		int prime = 57;
+//		return prime + (m_Characters[0] != null ? m_Characters[0].hashCode() : 0) + (m_Characters[1] != null ? m_Characters[1].hashCode() : 0);
+//	}
 	
 	@Override
 	public void print(){

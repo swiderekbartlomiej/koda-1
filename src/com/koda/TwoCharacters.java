@@ -44,7 +44,7 @@ public class TwoCharacters extends HuffmanTreeNode
 		return m_Characters[1];
 	}
 	
-	private boolean equals(TwoCharacters other)
+	private boolean equals_Kuby(TwoCharacters other)
 	{
 		if
 		(
@@ -60,8 +60,8 @@ public class TwoCharacters extends HuffmanTreeNode
 		}
 	}
 	
-	@Override
-	public boolean equals(Object other)
+	//@Override
+	public boolean equals_Kuby(Object other)
 	{
 		if(other instanceof TwoCharacters)
 		{
@@ -69,12 +69,31 @@ public class TwoCharacters extends HuffmanTreeNode
 		}
 		return false;
 	}
+	//MARNA PRÓBA RAFAŁA
+	@Override
+	public boolean equals(Object other)
+	{
+		//System.out.println("Wolam Zewnetrzny equals");
+		if(other instanceof TwoCharacters)
+		{
+			return this.equals((TwoCharacters)other);
+		}
+		return false;
+	}
+	
+	//DALSZA CZESC MARNEJ PROBY
+	private boolean equals(TwoCharacters other)
+	{
+		//System.out.println("Wolam wewnetrzny equals");
+		return (this.getFirst().hashCode() == other.getFirst().hashCode() && this.getSecond().hashCode() == other.getSecond().hashCode());
+	}
 	
 	@Override
 	public int hashCode()
 	{
-		int prime = 53;
-		return prime + (m_Characters[0] != null ? m_Characters[0].hashCode() : 0) + (m_Characters[1] != null ? m_Characters[1].hashCode() : 0);
+		return this.getValue().hashCode();
+		//int prime = 53;
+		//return prime + (m_Characters[0] != null ? m_Characters[0].hashCode() : 0) + (m_Characters[1] != null ? m_Characters[1].hashCode() : 0);
 	}
 	
 	@Override

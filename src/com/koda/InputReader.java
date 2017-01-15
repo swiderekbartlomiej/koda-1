@@ -90,7 +90,6 @@ public class InputReader {
 					nextChar+=" ";
 				}
 				inputList.add(nextChar);
-				//System.out.println(nextChar);
 				if (!statisticMap.containsKey(nextChar)){
 					statisticMap.put(nextChar, 1);
 				}
@@ -126,7 +125,6 @@ public class InputReader {
 				actualChar = scanner.next();
 				String nextChar = contextChar+actualChar;
 				inputList.add(nextChar);
-				//System.out.println(nextChar);
 				if (!statisticMap.containsKey(nextChar)){
 					statisticMap.put(nextChar, 1);
 				}

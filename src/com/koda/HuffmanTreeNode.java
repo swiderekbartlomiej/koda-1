@@ -31,13 +31,13 @@ public class HuffmanTreeNode
 		m_Weight = w;
 	}
 	
-	private boolean equals(HuffmanTreeNode node)
+	private boolean equals_Kuby(HuffmanTreeNode node)
 	{
 		return m_Weight == node.m_Weight;
 	}
 	
-	@Override
-	public boolean equals(Object other)
+	//@Override
+	public boolean equals_Kuby(Object other)
 	{
 		if(other instanceof HuffmanTreeNode)
 		{
@@ -46,8 +46,8 @@ public class HuffmanTreeNode
 		return false;
 	}
 	
-	@Override
-	public int hashCode()
+	//@Override
+	public int hashCode_Kuby()
 	{
 		int prime = 37;
 		return (int) (prime + m_Weight);
