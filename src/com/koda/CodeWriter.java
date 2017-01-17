@@ -26,37 +26,27 @@ public class CodeWriter<NodeType extends HuffmanTreeNode> {
 	 * Przyjmuje od tłumacza ArrayListe syboli w zakodowanej postaci, i zapisuje je nieredundantnie do pliku.
 	 * @param listOfCodeWords lista zakodowanych symboli, podawana przez tłumacza
 	 */
-	public void saveCodeToFile(ArrayList listOfCodeWords, HashMap<NodeType, BinaryBox> dictionary){
-		
+	public void saveCodeToFile(ArrayList<?> listOfCodeWords, HashMap<NodeType, BinaryBox> dictionary, String fileType){
 		BinaryBox actualBox = new BinaryBox();
-		String partA; //int
-		String partB; //int
-		int partBMask;
-		
+		String partA; 
+		String partB; 
 		for (Object codeWord : listOfCodeWords){
 			int intCodeWord = Integer.parseInt(codeWord.toString(),2);
-			//System.out.println(intCodeWord);
-			if (actualBox.returnFreeSpace() >= codeWord.toString().length()){	//calcSignificantBits(intCodeWord)){
+			if (actualBox.returnFreeSpace() >= codeWord.toString().length()){	
 				actualBox.shiftLeft(codeWord.toString().length());
 				actualBox.appendValue(intCodeWord);
 				actualBox.increaseSpaceUsed(codeWord.toString().length());
 			}else if (actualBox.returnFreeSpace() > 0){
 				int shitfValue = codeWord.toString().length()-actualBox.returnFreeSpace();
-				partA = codeWord.toString().substring(0, codeWord.toString().length()-shitfValue);  //partA = intCodeWord >> shitfValue;
+				partA = codeWord.toString().substring(0, codeWord.toString().length()-shitfValue); 
 				actualBox.shiftLeft(partA.length());
 				actualBox.appendValue(Integer.parseInt(partA,2));
 				actualBox.increaseSpaceUsed(partA.length());
-				
 				outputlistOfIntMagazines.add(actualBox.getValue());
-				
 				actualBox = new BinaryBox();
-
-				//partBMask = (int) Math.pow(2, shitfValue)-1;
-				partB = codeWord.toString().substring(codeWord.toString().length()-shitfValue);//partB = intCodeWord&partBMask;
-				
+				partB = codeWord.toString().substring(codeWord.toString().length()-shitfValue);
 				actualBox.appendValue(Integer.parseInt(partB,2));
 				actualBox.increaseSpaceUsed(partB.length());
-				
 			}else{
 				outputlistOfIntMagazines.add(actualBox.getValue());
 				actualBox = new BinaryBox();
@@ -68,9 +58,14 @@ public class CodeWriter<NodeType extends HuffmanTreeNode> {
 			actualBox.forceCloseBox();
 			outputlistOfIntMagazines.add(actualBox.getValue());
 		
-		
 		try {
 			PrintWriter dictionaryOut = new PrintWriter("/home/koda/gen-bin2-dic");
+			for (Map.Entry<NodeType, BinaryBox> entry : dictionary.entrySet()){
+				dictionaryOut.write("["+entry.getKey().getClass().toString().split("\\.")[entry.getKey().getClass().toString().split("\\.").length-1]+"]");
+				break;
+			}
+			dictionaryOut.write("[type="+fileType+"]");
+			dictionaryOut.write("[zeros="+actualBox.returnFreeSpace()+"]");
 			for (Map.Entry<NodeType, BinaryBox> entry : dictionary.entrySet()){
 				dictionaryOut.write("{");
 				dictionaryOut.write(entry.getKey().getValue());
@@ -87,10 +82,8 @@ public class CodeWriter<NodeType extends HuffmanTreeNode> {
 			}
 			out.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

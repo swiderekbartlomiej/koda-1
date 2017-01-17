@@ -31,28 +31,6 @@ public class HuffmanTreeNode
 		m_Weight = w;
 	}
 	
-	private boolean equals(HuffmanTreeNode node)
-	{
-		return m_Weight == node.m_Weight;
-	}
-	
-	@Override
-	public boolean equals(Object other)
-	{
-		if(other instanceof HuffmanTreeNode)
-		{
-			return this.equals((HuffmanTreeNode)other);
-		}
-		return false;
-	}
-	
-	@Override
-	public int hashCode()
-	{
-		int prime = 37;
-		return (int) (prime + m_Weight);
-	}
-	
 	public static int leftChild(int parentIndex)
 	{
 		return parentIndex * 2;
