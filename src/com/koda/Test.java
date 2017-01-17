@@ -1,6 +1,6 @@
-package KODA_package;
+package com.koda;
 
-import KODA_package.OptionsHandler.OptionException;
+import com.koda.OptionsHandler.OptionException;
 
 public class Test
 {
