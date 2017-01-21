@@ -1,2 +1,6 @@
 #Java compiled classes
 *.class
+
+#Eclipse stuff
+.classpath
+.project

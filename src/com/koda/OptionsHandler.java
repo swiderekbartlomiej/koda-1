@@ -46,8 +46,8 @@ public class OptionsHandler
 	private String m_OptionCodingOrDecoding = "cord";
 	
 	private String m_OptionFileFullPathDesc = "Path to directory where there is file to coding";
-	private String m_OptionCodingTypeDesc = "What is the type of coding";
-	private String m_OptionCodingOrDecodingDesc = "Choice between coding or decoding";
+	private String m_OptionCodingTypeDesc = "What is the type of coding (hss/hds/mc)";
+	private String m_OptionCodingOrDecodingDesc = "Choice between coding or decoding (cod/decod)";
 	
 	private Options m_Options;
 	private CommandLine m_CommandLine;

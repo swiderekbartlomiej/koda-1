@@ -33,7 +33,7 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 		
 		TreeNodeDecorator first = null;
 		TreeNodeDecorator second = null;
-		while(queue.size() != 1)
+		while(queue.size() > 1)
 		{
 			first = queue.remove();
 			second = queue.remove();
@@ -73,8 +73,6 @@ public class HuffmanTree<NodeType extends HuffmanTreeNode>
 					extended_tree.setAtIndex(TreeNodeDecorator.ROOT_INDEX, new HuffmanTreeNode(first.getWeight() + second.getWeight()));
 					extended_tree.setAtIndex(TreeNodeDecorator.ROOT_RIGHT_CHILD, second.getTreeNode());
 					moveTreeNode(extended_tree, TreeNodeDecorator.ROOT_LEFT_CHILD, first, TreeNodeDecorator.ROOT_INDEX);
-					
-					queue.add(extended_tree);
 				}
 				else
 				{
