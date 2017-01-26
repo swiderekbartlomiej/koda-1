@@ -250,7 +250,7 @@ public class InputReader {
 		//double sumProbability = 0;
 		for(Map.Entry<String, Integer> entry : statisticMap.entrySet()){
 			probabilityMap.put(entry.getKey(), entry.getValue().doubleValue()/numberOfElements.doubleValue());
-			//System.out.println(entry.getKey().toString() + " : " + entry.getValue().toString() + " : " + entry.getValue().doubleValue()/numberOfElements.doubleValue());
+			//System.out.println(entry.getKey().toString() + " : " + entry.getValue().toString());// + " : " + entry.getValue().doubleValue()/numberOfElements.doubleValue());
 			//sumProbability += entry.getValue().doubleValue()/numberOfElements.doubleValue();
 		}
 		//System.out.println(sumProbability);

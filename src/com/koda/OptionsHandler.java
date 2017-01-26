@@ -39,15 +39,15 @@ public class OptionsHandler
 		
 	private Path m_FileFullPath;
 	private CodingMethod m_CodingType;
-	private OperationType m_CodingOrDecoding;
+	//private OperationType m_CodingOrDecoding;
 	
 	private String m_OptionFileFullPath = "fpath" ;
 	private String m_OptionCodingType = "ctype";
-	private String m_OptionCodingOrDecoding = "cord";
+	//private String m_OptionCodingOrDecoding = "cord";
 	
 	private String m_OptionFileFullPathDesc = "Path to directory where there is file to coding";
 	private String m_OptionCodingTypeDesc = "What is the type of coding (hss/hds/mc)";
-	private String m_OptionCodingOrDecodingDesc = "Choice between coding or decoding (cod/decod)";
+	//private String m_OptionCodingOrDecodingDesc = "Choice between coding or decoding (cod/decod)";
 	
 	private Options m_Options;
 	private CommandLine m_CommandLine;
@@ -58,11 +58,11 @@ public class OptionsHandler
 		
 		Option file_dir_path = Option.builder(m_OptionFileFullPath).required(true).hasArg(true).desc(m_OptionFileFullPathDesc).build();
 		Option coding_type = Option.builder(m_OptionCodingType).required(true).hasArg(true).desc(m_OptionCodingTypeDesc).build();
-		Option operation = Option.builder(m_OptionCodingOrDecoding).required(true).hasArg(true).desc(m_OptionCodingOrDecodingDesc).build();
+		//Option operation = Option.builder(m_OptionCodingOrDecoding).required(true).hasArg(true).desc(m_OptionCodingOrDecodingDesc).build();
 		
 		m_Options.addOption(file_dir_path);
 		m_Options.addOption(coding_type);
-		m_Options.addOption(operation);
+		//m_Options.addOption(operation);
 		
 		if(arguments.length == 0)
 		{
@@ -94,14 +94,14 @@ public class OptionsHandler
 				throw new OptionException("Coding method is failed, message: " + e.getMessage());
 			}
 			
-			try
+			/*try
 			{
 				m_CodingOrDecoding = OperationType.getOperationType(m_CommandLine.getOptionValue(m_OptionCodingOrDecoding));
 			} 
 			catch (Exception e)
 			{
 				throw new OptionException("Operation type is failed, message: " + e.getMessage());
-			}
+			}*/
 		}
 	}
 			
@@ -110,10 +110,10 @@ public class OptionsHandler
 		return m_CodingType;
 	}
 	
-	public OperationType getOperationType()
+	/*public OperationType getOperationType()
 	{
 		return m_CodingOrDecoding;
-	}
+	}*/
 	
 	public Path getFileFullPath()
 	{

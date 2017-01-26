@@ -11,7 +11,7 @@ public class Test
 		OptionsHandler opHandler = new OptionsHandler(args);
 		System.out.println("Ścieżka do pliku: " + opHandler.getFileFullPath().toString());
 		System.out.println("Wybrana metoda kodowania: " + opHandler.getCodingMethod().getTag());
-		System.out.println("Wybrany tryb pracy (kodowanie/dekodowanie): " + opHandler.getOperationType().getTag());
+		//System.out.println("Wybrany tryb pracy (kodowanie/dekodowanie): " + opHandler.getOperationType().getTag());
       }
       catch (OptionException e)
       {
